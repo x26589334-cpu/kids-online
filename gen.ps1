@@ -126,7 +126,7 @@ foreach ($t in $sel) {
   foreach ($m in $rxSec.Matches($html)) { $secs[$m.Groups[1].Value.Trim()] = $m.Groups[2].Value }
   # 원본 섹션 제목이 다양(학력·경력/수업 방식/강점 …)하므로 "수업 형태"·"방문 가능 지역"만 빼고 순서대로 모두 가져온다
   $keep = @()
-  foreach ($m in $rxSec.Matches($html)) { $h = $m.Groups[1].Value.Trim(); if ($h -ne "수업 형태" -and $h -ne "방문 가능 지역") { $keep += ,@($h, $m.Groups[2].Value) } }
+  foreach ($m in $rxSec.Matches($html)) { $h = $m.Groups[1].Value.Trim(); if ($h -ne "수업 형태" -and $h -ne "방문 가능 지역") { $body = [regex]::Replace($m.Groups[2].Value, "s*<li>s*최종s*수정[^<]*</li>", ""); if ($body -match "<li>|<p") { $keep += ,@($h, $body) } } }
 
   $subs = $t.s -split ","; $grs = $t.gr -split ","
   $subjLabel = ($subs -join "·")
@@ -137,7 +137,8 @@ foreach ($t in $sel) {
   # 칩
   $chips = ""
   if ($t.k -eq 1) { $chips += '<span class="chip kid">유아·아동</span>' }
-  $chips += '<span class="chip">' + $who + '</span><span class="chip on">' + $t.c + '</span>'
+  if ($t.g) { $chips += '<span class="chip">' + $who + '</span>' }
+  $chips += '<span class="chip on">' + $t.c + '</span>'
   for ($j = 0; $j -lt $subs.Count; $j++) {
     $g = if ($j -lt $grs.Count) { " " + $grs[$j] } else { "" }
     $chips += '<span class="chip">' + $subs[$j] + $g + '</span>'
