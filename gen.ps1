@@ -1,4 +1,4 @@
-# 티칭코칭 키즈 — 선생님 데이터/개별 페이지/사이트맵 생성기
+# 키즈튜터 — 선생님 데이터/개별 페이지/사이트맵 생성기
 # 원본: ../gwaoe-page/teachers-data.js, teachers-search.js, teacher-{id}.html
 # 선택 기준: 화상 가능(화상 / 방문+화상) AND (유아·아동 코치 k=1 OR 어떤 과목이든 유아·초1·초2부터 지도)
 # 실행: powershell -NoProfile -ExecutionPolicy Bypass -File gen_bom.ps1   (UTF-8 BOM 필수)
@@ -8,7 +8,7 @@ $ErrorActionPreference = "Stop"
 $utf8 = New-Object System.Text.UTF8Encoding($false)
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
 $src  = Join-Path (Split-Path -Parent $root) "gwaoe-page"
-$SITE = "https://kids.perfectedu.co.kr"
+$SITE = "https://kidstutor.co.kr"
 $today = (Get-Date).ToString("yyyy-MM-dd")
 
 # ---------- 1) 선생님 선택 ----------
@@ -30,7 +30,7 @@ Write-Host "선택된 선생님: $($sel.Count)명 (유아·아동 코치 $(@($se
 
 # ---------- 2) teachers-data.js ----------
 $sb = New-Object System.Text.StringBuilder
-[void]$sb.AppendLine("/* 티칭코칭 키즈 선생님 목록 데이터 (자동 생성 · gen.ps1)")
+[void]$sb.AppendLine("/* 키즈튜터 선생님 목록 데이터 (자동 생성 · gen.ps1)")
 [void]$sb.AppendLine("   i=id, n=이름(마스킹), g=성별, c=수업형태, s=과목, gr=학년, r=방문지역, sd=시도, k=유아·아동 코치")
 [void]$sb.AppendLine("   원본: perfectedu.co.kr(gwaoe-page) 코치 데이터 중 화상 가능 + 유아/초1~2 지도 선생님만 */")
 [void]$sb.AppendLine("window.TEACHERS=[")
@@ -50,7 +50,7 @@ foreach ($m in $srx.Matches($search)) { $idx[$m.Groups["id"].Value] = $m.Groups[
 $ids = @{}; foreach ($t in $sel) { $ids[$t.i] = $true }
 $parts = @()
 foreach ($t in $sel) { if ($idx.ContainsKey($t.i)) { $parts += ('"' + $t.i + '":"' + $idx[$t.i] + '"') } }
-$s2 = "/* 티칭코칭 키즈 선생님 검색 색인 (자동 생성 · gen.ps1)`n   { 선생님id: '소개·경력 본문' } — 소문자. teachers.html 에서 defer 로 로드 */`nwindow.TSEARCH={" + ($parts -join ",") + "};`nif(window.__tRefresh)window.__tRefresh();`n"
+$s2 = "/* 키즈튜터 선생님 검색 색인 (자동 생성 · gen.ps1)`n   { 선생님id: '소개·경력 본문' } — 소문자. teachers.html 에서 defer 로 로드 */`nwindow.TSEARCH={" + ($parts -join ",") + "};`nif(window.__tRefresh)window.__tRefresh();`n"
 [IO.File]::WriteAllText((Join-Path $root "teachers-search.js"), $s2, $utf8)
 Write-Host "검색 색인: $($parts.Count)건"
 
@@ -65,7 +65,7 @@ function Esc([string]$s) { return $s.Replace("&","&amp;").Replace('"',"&quot;").
 $header = @'
 <header>
   <div class="wrap nav">
-    <a href="index.html" class="brand"><span class="logo">K</span>티칭코칭 키즈</a>
+    <a href="index.html" class="brand"><span class="logo">K</span>키즈튜터</a>
     <nav class="nav-links">
       <a href="index.html">홈</a>
       <a href="index.html#ages">연령별 수업</a>
@@ -85,7 +85,7 @@ $footer = @'
 <footer>
   <div class="wrap foot-grid">
     <div>
-      <div class="brand"><span class="logo">K</span>티칭코칭 키즈</div>
+      <div class="brand"><span class="logo">K</span>키즈튜터</div>
       <p>5세부터 초등 3학년까지, 유아·아동 전문 선생님과 하는 1:1 화상 수업. 티칭코칭(perfectedu.co.kr)의 유아·초등 저학년 전문 서비스입니다.</p>
     </div>
     <div>
@@ -108,7 +108,7 @@ $footer = @'
     </div>
   </div>
   <div class="wrap copy-bar">
-    <span>© 2026 티칭코칭 키즈. All rights reserved.</span>
+    <span>© 2026 키즈튜터. All rights reserved.</span>
     <span>이용약관 · 개인정보처리방침</span>
   </div>
 </footer>
@@ -151,7 +151,7 @@ foreach ($t in $sel) {
     "이동 시간 없이 화면으로 진행하는 실시간 1:1 화상 수업입니다. 전국·해외 어디서나 가능합니다."
   }
 
-  $title = $t.n + " 선생님 · " + $subjLabel + " 유아·초등 저학년 화상과외 · 티칭코칭 키즈"
+  $title = $t.n + " 선생님 · " + $subjLabel + " 유아·초등 저학년 화상과외 · 키즈튜터"
   $desc  = $lowest + "부터 지도하는 " + $subjLabel + " 1:1 화상 수업 " + $who + ". " + $kidTag + ". " + $t.c + " 수업. 무료 20분 체험으로 아이 반응을 먼저 확인하세요."
   $kw    = ($subs | ForEach-Object { "유아 " + $_ + " 화상과외, 초등 저학년 " + $_ + " 과외" }) -join ", "
   $url   = "$SITE/teacher-" + $t.i + ".html"
@@ -168,12 +168,12 @@ foreach ($t in $sel) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>$(Esc $title)</title>
 <meta name="description" content="$(Esc $desc)" />
-<meta name="keywords" content="$(Esc $kw), 아동 화상 수업, 티칭코칭 키즈" />
+<meta name="keywords" content="$(Esc $kw), 아동 화상 수업, 키즈튜터" />
 <link rel="canonical" href="$url" />
 <meta name="robots" content="index,follow" />
 <meta name="theme-color" content="#ff7a1f" />
 <meta property="og:type" content="profile" />
-<meta property="og:site_name" content="티칭코칭 키즈" />
+<meta property="og:site_name" content="키즈튜터" />
 <meta property="og:title" content="$(Esc $title)" />
 <meta property="og:description" content="$(Esc $desc)" />
 <meta property="og:url" content="$url" />
@@ -196,7 +196,7 @@ foreach ($t in $sel) {
   "jobTitle": "유아·초등 저학년 화상 과외 선생님",
   "url": "$url",
   "knowsAbout": [$(($subs | ForEach-Object { '"' + $_ + '"' }) -join ",")],
-  "worksFor": { "@type": "EducationalOrganization", "name": "티칭코칭 키즈", "url": "$SITE/" }
+  "worksFor": { "@type": "EducationalOrganization", "name": "키즈튜터", "url": "$SITE/" }
 }
 </script>
 </head>

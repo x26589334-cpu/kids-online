@@ -31,7 +31,7 @@ $fLogo = [System.Drawing.Font]::new("Arial", 54, [System.Drawing.FontStyle]::Bol
 $sf = [System.Drawing.StringFormat]::new(); $sf.Alignment = "Center"; $sf.LineAlignment = "Center"
 $g.DrawString("K", $fLogo, (Brush "#ffffff"), ([System.Drawing.RectangleF]::new($x, $y, $s, $s)), $sf)
 $fBrand = Pick $korFonts 40 ([System.Drawing.FontStyle]::Bold)
-$g.DrawString("티칭코칭 키즈", $fBrand, (Brush "#1e2a3f"), 200, 110)
+$g.DrawString("키즈튜터", $fBrand, (Brush "#1e2a3f"), 200, 110)
 # 헤드라인
 $fH = Pick $korFonts 74 ([System.Drawing.FontStyle]::Bold)
 $g.DrawString("유아·초등 저학년", $fH, (Brush "#1e2a3f"), 84, 235)

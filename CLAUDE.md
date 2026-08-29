@@ -1,9 +1,9 @@
-# 티칭코칭 키즈 — 유아·초등 저학년 화상과외 사이트 (이어서 작업용)
+# 키즈튜터 — 유아·초등 저학년 화상과외 사이트 (이어서 작업용)
 
 ## 개요
 - 5세~초3 대상 **1:1 화상과외** 홍보 사이트. 정적 HTML/CSS/JS, GitHub Pages 배포 (gwaoe-page / wawa-renewal 과 같은 형식)
-- **브랜드:** 티칭코칭 키즈 (티칭코칭 perfectedu.co.kr 의 유아·초등 저학년 서비스)
-- **도메인(예정):** https://kids.perfectedu.co.kr — 확정되면 전 파일의 `kids.perfectedu.co.kr` 치환 + `CNAME` 파일 생성
+- **브랜드:** 키즈튜터 (티칭코칭 perfectedu.co.kr 의 유아·초등 저학년 서비스. 사이트 안에서 티칭코칭은 모회사로만 언급)
+- **도메인:** https://kidstutor.co.kr (가비아 구매, `CNAME` 파일 있음). GitHub Pages 브랜치: **main**
 - **상담 전화:** 010-6832-1994 (티칭코칭과 동일)
 
 ## 배포 방법
@@ -46,11 +46,11 @@ git push
 
 ## 처음 배포 (아직 안 했으면)
 1. GitHub 에 `kids-online` 저장소 생성: `gh repo create kids-online --public --source=. --push` (gh 는 `C:\Program Files\GitHub CLI\gh.exe`)
-2. 저장소 Settings → Pages → Branch: master / (root)
+2. 저장소 Settings → Pages → Branch: main / (root)
 3. 도메인 연결 시 `CNAME` 파일에 도메인 한 줄 + DNS 에 CNAME 레코드(`x26589334-cpu.github.io`)
 
 ## 다음에 할 후보
-- 도메인 확정 → canonical/og/sitemap URL 치환, CNAME
+- 가비아 DNS: A 레코드 185.199.108.153 / .109.153 / .110.153 / .111.153 + www CNAME x26589334-cpu.github.io → GitHub Pages 에서 HTTPS 강제
 - 구글 서치콘솔·네이버 서치어드바이저 등록 (meta 태그는 index.html head 에 추가)
 - 실제 학부모 후기·수업 사진으로 교체 (현재 후기 3개는 예시 문구)
 - 블로그(유아 한글 떼기 시기, 파닉스 시작 나이 등 SEO 글) 추가 — gwaoe-page 의 `.bpost/.article` 스타일 그대로 사용 가능
