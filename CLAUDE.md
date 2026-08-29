@@ -24,7 +24,7 @@ git push
 - `style.css` — gwaoe-page/style.css 를 복사해 토큰만 키즈 팔레트로 바꾸고, 끝에 "키즈 전용 추가" 블록을 붙인 것
   - ⚠️ 수정 시 전 페이지의 `style.css?v=` 숫자 올리기 (현재 v1)
 - `script.js` — gwaoe-page 와 동일 (reveal, paginate)
-- `form.js` — 신청 폼 → 구글 시트. 과외·픽포스·데일리카네기와 **같은 공용 Apps Script 웹앱** → "웹 문의" 시트의 **"키즈튜터" 탭**(`sheet=키즈튜터` 전송, 구분 `키즈튜터-무료체험신청` 등). 참고 사본 `google-apps-script.gs` (허용 탭 목록 버전이면 `"키즈튜터": true` 추가 필요)
+- `form.js` — 신청 폼 → 구글 시트. 과외·픽포스·데일리카네기와 **같은 공용 Apps Script 웹앱** → "웹 문의" 시트의 **"키즈 튜터" 탭**(`sheet=키즈 튜터` 전송, 구분 `키즈튜터-무료체험신청` 등). 참고 사본 `google-apps-script.gs` (허용 탭 목록 버전이면 `"키즈 튜터": true` 추가 필요)
 - `gen.ps1` — 선생님 데이터/페이지/sitemap 생성기 · `make-images.ps1` — og-image.png / apple-touch-icon.png 생성기
 - `sitemap.xml` (gen.ps1 생성) / `robots.txt` / `favicon.svg`
 

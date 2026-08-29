@@ -2,10 +2,10 @@
    신청 폼 → 구글 시트 연결 (키즈튜터 · 유아/초등 저학년 화상과외)
    -----------------------------------------------------------
    과외(perfectedu)·픽포스·데일리카네기와 같은 **공용 Apps Script 웹앱**으로 보냅니다.
-   → 구글 "웹 문의" 시트(ID 1UUS6le8…)의 **"키즈튜터" 탭**에 저장
-     (폼이 sheet=키즈튜터 를 함께 보내고, 스크립트가 그 탭을 찾거나 자동 생성)
+   → 구글 "웹 문의" 시트(ID 1UUS6le8…)의 **"키즈 튜터" 탭**에 저장
+     (폼이 sheet=키즈 튜터 를 함께 보내고, 스크립트가 그 탭을 찾거나 자동 생성)
    → 구분 컬럼: 키즈튜터-무료체험신청 / 키즈튜터-수업방식-상담신청 / 키즈튜터-선생님지정상담
-   ※ 배포된 스크립트가 "허용 탭 목록" 버전이면 ALLOWED_TABS 에 "키즈튜터": true 한 줄 추가
+   ※ 배포된 스크립트가 "허용 탭 목록" 버전이면 ALLOWED_TABS 에 "키즈 튜터": true 한 줄 추가
      (없으면 기본 탭 "과외"로 들어감). 참고 사본: google-apps-script.gs
    =========================================================== */
 
@@ -34,7 +34,7 @@ function _wireForm(opts){
     for(const id of opts.required){
       if(!_val(id)){ alert("필수 항목을 모두 입력해 주세요."); const el=document.getElementById(id); if(el) el.focus(); return; }
     }
-    const payload = { sheet: "키즈튜터", _form: opts.title, _page: location.pathname, _time: new Date().toLocaleString("ko-KR") };
+    const payload = { sheet: "키즈 튜터", _form: opts.title, _page: location.pathname, _time: new Date().toLocaleString("ko-KR") };
     for(const col in opts.fields){ payload[col] = _val(opts.fields[col]); }
 
     const btn = form.querySelector('button[type="submit"], button');
