@@ -24,7 +24,7 @@ git push
 - `style.css` — gwaoe-page/style.css 를 복사해 토큰만 키즈 팔레트로 바꾸고, 끝에 "키즈 전용 추가" 블록을 붙인 것
   - ⚠️ 수정 시 전 페이지의 `style.css?v=` 숫자 올리기 (현재 v1)
 - `script.js` — gwaoe-page 와 동일 (reveal, paginate)
-- `form.js` — 신청 폼 → 구글 시트. **perfectedu 와 같은 Apps Script 웹앱**으로 보내며 "과외" 탭에 `키즈-…` 구분으로 쌓임
+- `form.js` — 신청 폼 → 구글 시트. 과외·픽포스·데일리카네기와 **같은 공용 Apps Script 웹앱** → "웹 문의" 시트의 **"키즈튜터" 탭**(`sheet=키즈튜터` 전송, 구분 `키즈튜터-무료체험신청` 등). 참고 사본 `google-apps-script.gs` (허용 탭 목록 버전이면 `"키즈튜터": true` 추가 필요)
 - `gen.ps1` — 선생님 데이터/페이지/sitemap 생성기 · `make-images.ps1` — og-image.png / apple-touch-icon.png 생성기
 - `sitemap.xml` (gen.ps1 생성) / `robots.txt` / `favicon.svg`
 
@@ -54,4 +54,4 @@ git push
 - 구글 서치콘솔·네이버 서치어드바이저 등록 (meta 태그는 index.html head 에 추가)
 - 실제 학부모 후기·수업 사진으로 교체 (현재 후기 3개는 예시 문구)
 - 블로그(유아 한글 떼기 시기, 파닉스 시작 나이 등 SEO 글) 추가 — gwaoe-page 의 `.bpost/.article` 스타일 그대로 사용 가능
-- Apps Script 를 "키즈" 탭 전용으로 분리하고 싶으면 form.js 상단 주석 참고
+- 폼 필드명(이름/연락처/학년/분야/선생님성별/수업시간대/선생님/남길말)은 시트 헤더가 되므로 바꾸면 새 컬럼이 생김

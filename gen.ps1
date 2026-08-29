@@ -217,7 +217,7 @@ $header
         <h2>$($t.n) 선생님</h2>
         <div class="chips">$chips</div>
       </div>
-      <a href="#teacherForm" class="btn btn-primary tcta">🎁 이 선생님과 무료 체험</a>
+      <a href="#tform" class="btn btn-primary tcta">🎁 이 선생님과 무료 체험</a>
     </div>
     <div class="tsec">
       <h3>이런 아이에게 맞아요</h3>
@@ -227,7 +227,7 @@ $secHtml    <div class="tsec">
       <h3>수업 형태</h3>
       <p class="tdesc">$modeText</p>
     </div>
-    <div class="tform" id="teacherForm">
+    <div class="tform" id="tform">
       <h3>🎁 $($t.n) 선생님과 무료 20분 체험 수업</h3>
       <p class="lead">아이 나이와 연락처만 남겨 주세요. 이 선생님의 가능 시간을 확인해 24시간 안에 연락드릴게요.</p>
       <form id="teacherForm" novalidate>
@@ -260,7 +260,7 @@ $secHtml    <div class="tsec">
 </section>
 $footer
 <div class="float-cta">
-  <a href="#teacherForm" class="btn btn-primary">🎁 무료 체험 신청</a>
+  <a href="#tform" class="btn btn-primary">🎁 무료 체험 신청</a>
 </div>
 <script src="script.js"></script>
 <script src="form.js"></script>
