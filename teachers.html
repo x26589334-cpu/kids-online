@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>유아·초등 저학년 화상 선생님 찾기 · 티칭코칭 키즈</title>
+<meta name="description" content="유아·초등 저학년(5세~초3) 1:1 화상 수업이 가능한 선생님. 유아·아동 코칭 경력, 과목(한글·국어·영어·수학), 성별로 찾아보세요. 이름은 개인정보 보호를 위해 일부 가려져 있습니다." />
+<meta name="keywords" content="유아 화상 선생님, 초등 저학년 화상과외 선생님, 유아 한글 선생님, 파닉스 선생님, 초등 연산 선생님, 아동 화상 수업" />
+<link rel="canonical" href="https://kids.perfectedu.co.kr/teachers.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="티칭코칭 키즈" />
+<meta property="og:title" content="유아·초등 저학년 화상 선생님 찾기 · 티칭코칭 키즈" />
+<meta property="og:description" content="5세~초3 1:1 화상 수업이 가능한 선생님을 과목·성별·경력으로 찾아보세요." />
+<meta property="og:url" content="https://kids.perfectedu.co.kr/teachers.html" />
+<meta property="og:image" content="https://kids.perfectedu.co.kr/og-image.png" />
+<meta property="og:locale" content="ko_KR" />
+<meta name="robots" content="index,follow" />
+<meta name="theme-color" content="#ff7a1f" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<link rel="preconnect" href="https://fastly.jsdelivr.net" crossorigin />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&display=swap" />
+<link rel="stylesheet" href="style.css?v=1" />
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="brand"><span class="logo">K</span>티칭코칭 키즈</a>
+    <nav class="nav-links">
+      <a href="index.html">홈</a>
+      <a href="index.html#ages">연령별 수업</a>
+      <a href="index.html#courses">프로그램</a>
+      <a href="teachers.html" class="active">선생님 찾기</a>
+      <a href="process.html">수업방식</a>
+      <a href="index.html#reviews">학부모 후기</a>
+      <a href="index.html#faq">자주 묻는 질문</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="tel:01068321994" class="btn btn-primary">📞 상담신청 <span class="full">010-6832-1994</span></a>
+    </div>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="crumb"><a href="index.html">홈</a> › 선생님 찾기</div>
+    <h1>우리 아이와 잘 맞을 선생님을 찾아보세요</h1>
+    <p>5세부터 초등 3학년까지 1:1 화상 수업이 가능한 선생님입니다. 유아·아동 코칭 경력이 있는 선생님이 먼저 보여요.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="tsearch-row">
+      <input id="tSearch" class="tsearch" type="search" placeholder="🔍 과목·키워드·선생님으로 검색  (예: 한글 · 파닉스 · 유치원 · 연산 · 김ㅇ희)" autocomplete="off" />
+      <button type="button" class="btn btn-primary" id="tSearchBtn">검색</button>
+    </div>
+    <div class="tfilter">
+      <div class="row" id="fKid">
+        <span class="lab">대상</span>
+        <button class="fchip on" data-v="전체">전체</button>
+        <button class="fchip" data-v="유아">유아·아동 코칭 경력</button>
+        <button class="fchip" data-v="초등">초1부터 지도</button>
+      </div>
+      <div class="row" id="fSubj">
+        <span class="lab">과목</span>
+        <button class="fchip on" data-v="전체">전체</button>
+        <button class="fchip" data-v="국어">국어·한글</button>
+        <button class="fchip" data-v="영어">영어·파닉스</button>
+        <button class="fchip" data-v="수학">수학·연산</button>
+        <button class="fchip" data-v="과학">과학</button>
+        <button class="fchip" data-v="사회">사회</button>
+        <button class="fchip" data-v="코딩">코딩</button>
+      </div>
+      <div class="row" id="fGender">
+        <span class="lab">성별</span>
+        <button class="fchip on" data-v="전체">전체</button>
+        <button class="fchip" data-v="여">여선생님</button>
+        <button class="fchip" data-v="남">남선생님</button>
+      </div>
+      <div class="row" id="fType">
+        <span class="lab">수업형태</span>
+        <button class="fchip on" data-v="전체">전체</button>
+        <button class="fchip" data-v="화상">화상만</button>
+        <button class="fchip" data-v="방문+화상">방문도 가능</button>
+      </div>
+    </div>
+    <div class="tcount" id="tCount"></div>
+    <div class="tgrid" id="tGrid"></div>
+    <div class="pager" id="tPager"></div>
+  </div>
+</section>
+
+<section class="why">
+  <div class="wrap center">
+    <span class="eyebrow">선생님 기준</span>
+    <h2 class="title">어린아이는 아무나 가르치지 않습니다</h2>
+    <p class="lead">티칭코칭·와와 코치진 중 유아·초등 저학년 지도 경험이 확인된 선생님만 이 사이트에 올립니다.</p>
+  </div>
+  <div class="wrap feat">
+    <div class="item reveal"><div class="ico">🧸</div><h4>유아·아동 지도 경험</h4><p>유치원·어린이집·방과후·학습지·문화센터 등에서 5~9세를 가르친 경력이 있는 선생님을 우선 배정합니다.</p></div>
+    <div class="item reveal"><div class="ico">💻</div><h4>화상 수업 진행 능력</h4><p>화면 공유·교구 활용·짧은 활동 전환 등 어린아이 화상 수업에 필요한 진행 방식을 갖춘 선생님입니다.</p></div>
+    <div class="item reveal"><div class="ico">🛡️</div><h4>신원·경력 확인</h4><p>학력·경력·신원을 확인한 코치진입니다. 이름은 개인정보 보호를 위해 가운데 글자를 가렸습니다.</p></div>
+  </div>
+</section>
+
+<section style="background:var(--bg-soft)">
+  <div class="wrap center">
+    <h2 class="title">어떤 선생님이 맞을지 모르겠다면</h2>
+    <p class="lead center">아이 나이, 성향, 필요한 한 가지만 알려주세요. 상담 선생님이 두세 분으로 좁혀 추천드려요.</p>
+    <div class="hero-cta" style="justify-content:center;margin-top:24px">
+      <a href="tel:01068321994" class="btn btn-primary">📞 010-6832-1994 상담신청</a>
+      <a href="index.html#apply" class="btn btn-ghost">무료 20분 체험 신청</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <div class="brand"><span class="logo">K</span>티칭코칭 키즈</div>
+      <p>5세부터 초등 3학년까지, 유아·아동 전문 선생님과 하는 1:1 화상 수업. 티칭코칭(perfectedu.co.kr)의 유아·초등 저학년 전문 서비스입니다.</p>
+    </div>
+    <div>
+      <h5>바로가기</h5>
+      <ul>
+        <li><a href="index.html#ages">연령별 수업</a></li>
+        <li><a href="index.html#courses">프로그램</a></li>
+        <li><a href="teachers.html">선생님 찾기</a></li>
+        <li><a href="process.html">수업방식</a></li>
+        <li><a href="https://perfectedu.co.kr/" rel="noopener">초·중·고 과외는 티칭코칭</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5>문의</h5>
+      <ul>
+        <li><a href="tel:01068321994">전화: 010-6832-1994</a></li>
+        <li><a href="index.html#apply">무료 체험 신청</a></li>
+        <li><a href="index.html">운영시간: 09:00 – 21:00</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap copy-bar">
+    <span>© 2026 티칭코칭 키즈. All rights reserved.</span>
+    <span>이용약관 · 개인정보처리방침</span>
+  </div>
+</footer>
+
+<div class="float-cta">
+  <a href="index.html#apply" class="btn btn-primary">🎁 무료 체험 신청</a>
+</div>
+
+<script src="teachers-data.js"></script>
+<script src="teachers-search.js" defer></script>
+<script>
+(function(){
+  const ALL = window.TEACHERS || [];
+  const grid = document.getElementById('tGrid');
+  const countEl = document.getElementById('tCount');
+  const pagerEl = document.getElementById('tPager');
+  const searchEl = document.getElementById('tSearch');
+  const GRADS = ['linear-gradient(135deg,#ff7a1f,#ffa94d)','linear-gradient(135deg,#1fb59b,#7fe0cd)','linear-gradient(135deg,#ff5c8a,#ffa1bd)','linear-gradient(135deg,#5b8def,#9dbcff)'];
+  const PER = 24;
+  let fKid='전체', fSubj='전체', fGender='전체', fType='전체', page=1, cur=[];
+
+  function match(t){
+    if(fKid==='유아' && !t.k) return false;
+    if(fKid==='초등' && t.k) return false;
+    if(fSubj!=='전체' && t.s.split(',').indexOf(fSubj)<0) return false;
+    if(fGender!=='전체' && t.g!==fGender) return false;
+    if(fType!=='전체' && t.c!==fType) return false;
+    const q = searchEl.value.trim().toLowerCase();
+    if(q){
+      const extra = (window.TSEARCH && window.TSEARCH[t.i]) ? window.TSEARCH[t.i] : '';
+      const hay = (t.n+' '+t.s+' '+t.c+' '+t.r+' '+t.gr+' '+(t.k?'유아 아동 ':'')+extra).toLowerCase();
+      if(!q.split(/\s+/).filter(Boolean).every(tok=>hay.includes(tok))) return false;
+    }
+    return true;
+  }
+  function who(t){ return t.g==='여' ? '여선생님' : (t.g==='남' ? '남선생님' : '선생님'); }
+  function card(t,i){
+    const sub = t.s.split(','), grs = t.gr.split(',');
+    const chips = (t.k?'<span class="chip kid">유아·아동</span>':'') + sub.map((s,k)=>'<span class="chip">'+s+(grs[k]?' '+grs[k]:'')+'</span>').join('');
+    const where = '💻 전국·해외 화상 수업' + (t.r ? ' · 방문: '+t.r.split('|').slice(0,2).join(', ') : '');
+    return '<a class="tc" href="teacher-'+t.i+'.html">'
+      + '<div class="top"><div class="ini" style="background:'+GRADS[i%4]+'">'+t.n.charAt(0)+'</div>'
+      + '<div><div class="nm">'+t.n+' 선생님</div><div class="sub">'+who(t)+' · '+t.c+'</div></div></div>'
+      + '<div class="chips">'+chips+'</div>'
+      + '<div class="where">'+where+'</div></a>';
+  }
+  function buildPager(total){
+    const pages = Math.ceil(total/PER);
+    if(pages<=1){ pagerEl.innerHTML=''; return; }
+    let h = '<button '+(page===1?'disabled':'')+' data-p="'+(page-1)+'">‹</button>';
+    const win=[];
+    for(let p=1;p<=pages;p++){
+      if(p===1||p===pages||(p>=page-1&&p<=page+1)) win.push(p);
+      else if(win[win.length-1]!=='...') win.push('...');
+    }
+    win.forEach(p=>{ h += (p==='...') ? '<span class="dots">…</span>' : '<button class="'+(p===page?'active':'')+'" data-p="'+p+'">'+p+'</button>'; });
+    h += '<button '+(page===pages?'disabled':'')+' data-p="'+(page+1)+'">›</button>';
+    pagerEl.innerHTML = h;
+  }
+  function render(reset){
+    if(reset) page=1;
+    cur = ALL.filter(match);
+    countEl.textContent = cur.length ? '선생님 '+cur.length+'명' : '';
+    if(!cur.length){
+      grid.innerHTML = '<div class="tempty">조건에 맞는 선생님이 없어요.<br>필터를 넓히거나 📞 010-6832-1994로 문의해 주세요.</div>';
+      pagerEl.innerHTML=''; return;
+    }
+    const start=(page-1)*PER;
+    grid.innerHTML = cur.slice(start,start+PER).map((t,i)=>card(t,start+i)).join('');
+    buildPager(cur.length);
+  }
+  function wire(id, setter){
+    document.getElementById(id).addEventListener('click', e=>{
+      const b = e.target.closest('button'); if(!b) return;
+      document.querySelectorAll('#'+id+' button').forEach(x=>x.classList.remove('on'));
+      b.classList.add('on'); setter(b.dataset.v); render(true);
+    });
+  }
+  wire('fKid', v=>fKid=v);
+  wire('fSubj', v=>fSubj=v);
+  wire('fGender', v=>fGender=v);
+  wire('fType', v=>fType=v);
+
+  pagerEl.addEventListener('click', e=>{
+    const b = e.target.closest('button'); if(!b||b.disabled) return;
+    const p = parseInt(b.dataset.p,10);
+    const pages = Math.ceil(cur.length/PER);
+    if(p>=1&&p<=pages){ page=p; render(false); window.scrollTo({top: grid.getBoundingClientRect().top+window.scrollY-120, behavior:'smooth'}); }
+  });
+  function resetFilters(){
+    fKid='전체'; fSubj='전체'; fGender='전체'; fType='전체';
+    ['fKid','fSubj','fGender','fType'].forEach(id=>{
+      document.querySelectorAll('#'+id+' button').forEach(b=>{ b.classList.toggle('on', b.dataset.v==='전체'); });
+    });
+  }
+  function doSearch(){
+    resetFilters(); render(true);
+    const y = countEl.getBoundingClientRect().top + window.scrollY - 110;
+    window.scrollTo({top:y, behavior:'smooth'});
+  }
+  document.getElementById('tSearchBtn').addEventListener('click', doSearch);
+  searchEl.addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); doSearch(); } });
+  searchEl.addEventListener('input', ()=>render(true));
+  window.__tRefresh = function(){ if(searchEl.value.trim()) render(true); };
+  // URL 파라미터로 필터 진입 (예: teachers.html?s=영어)
+  const qs = new URLSearchParams(location.search);
+  if(qs.get('s')){ fSubj = qs.get('s'); document.querySelectorAll('#fSubj button').forEach(b=>b.classList.toggle('on', b.dataset.v===fSubj)); }
+  if(qs.get('kid')==='1'){ fKid='유아'; document.querySelectorAll('#fKid button').forEach(b=>b.classList.toggle('on', b.dataset.v==='유아')); }
+  render(true);
+})();
+</script>
+<script src="script.js"></script>
+</body>
+</html>

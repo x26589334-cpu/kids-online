@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# 검색용 데이터 파일 — 색인 대상이 아니고 용량이 커서 크롤 예산만 소모합니다.
+Disallow: /teachers-search.js
+
+Sitemap: https://kids.perfectedu.co.kr/sitemap.xml
