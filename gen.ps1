@@ -1,6 +1,6 @@
 # 키즈튜터 — 선생님 데이터/개별 페이지/사이트맵 생성기
 # 원본: ../gwaoe-page/teachers-data.js, teachers-search.js, teacher-{id}.html
-# 선택 기준: 화상 가능(화상 / 방문+화상) AND (유아·아동 코치 k=1 OR 어떤 과목이든 유아·초1·초2부터 지도)
+# 선택 기준: 화상 가능(화상 / 방문+화상) AND (유아·아동 코치 k=1 OR 어떤 과목이든 유아·초등(초1~6)부터 지도)
 # 실행: powershell -NoProfile -ExecutionPolicy Bypass -File gen_bom.ps1   (UTF-8 BOM 필수)
 
 $ErrorActionPreference = "Stop"
@@ -22,7 +22,7 @@ foreach ($m in $rx.Matches($data)) {
   $all += [pscustomobject]$t
 }
 $sel = @($all | Where-Object {
-  $_.c -match "화상" -and ( $_.k -eq 1 -or (($_.gr -split ",") | Where-Object { $_ -match "^(유아|초[12])" }) )
+  $_.c -match "화상" -and ( $_.k -eq 1 -or (($_.gr -split ",") | Where-Object { $_ -match "^(유아|초)" }) )
 })
 # 유아·아동 코치 먼저, 그 다음 원래 순서
 $sel = @($sel | Where-Object { $_.k -eq 1 }) + @($sel | Where-Object { $_.k -ne 1 })
@@ -32,7 +32,7 @@ Write-Host "선택된 선생님: $($sel.Count)명 (유아·아동 코치 $(@($se
 $sb = New-Object System.Text.StringBuilder
 [void]$sb.AppendLine("/* 키즈튜터 선생님 목록 데이터 (자동 생성 · gen.ps1)")
 [void]$sb.AppendLine("   i=id, n=이름(마스킹), g=성별, c=수업형태, s=과목, gr=학년, r=방문지역, sd=시도, k=유아·아동 코치")
-[void]$sb.AppendLine("   원본: perfectedu.co.kr(gwaoe-page) 코치 데이터 중 화상 가능 + 유아/초1~2 지도 선생님만 */")
+[void]$sb.AppendLine("   원본: perfectedu.co.kr(gwaoe-page) 코치 데이터 중 화상 가능 + 유아·초등 지도 선생님만 */")
 [void]$sb.AppendLine("window.TEACHERS=[")
 $lines = @()
 foreach ($t in $sel) {
@@ -76,7 +76,7 @@ $header = @'
       <a href="index.html#faq">자주 묻는 질문</a>
     </nav>
     <div class="nav-cta">
-      <a href="tel:01068321994" class="btn btn-primary">📞 상담신청 <span class="full">010-6832-1994</span></a>
+      <a href="#tform" class="btn btn-primary">🎁 무료체험 신청</a>
     </div>
   </div>
 </header>
@@ -86,7 +86,7 @@ $footer = @'
   <div class="wrap foot-grid">
     <div>
       <div class="brand"><span class="logo">K</span>키즈튜터</div>
-      <p>5세부터 초등 3학년까지, 유아·아동 전문 선생님과 하는 1:1 화상 수업. 티칭코칭(perfectedu.co.kr)의 유아·초등 저학년 전문 서비스입니다.</p>
+      <p>5세부터 초등 6학년까지, 유아·아동 전문 선생님과 하는 1:1 화상 수업. 티칭코칭(perfectedu.co.kr)의 유아·초등 전문 서비스입니다.</p>
     </div>
     <div>
       <h5>바로가기</h5>
@@ -131,8 +131,10 @@ foreach ($t in $sel) {
   $subs = $t.s -split ","; $grs = $t.gr -split ","
   $subjLabel = ($subs -join "·")
   $who = if ($t.g -eq "여") { "여선생님" } elseif ($t.g -eq "남") { "남선생님" } else { "선생님" }
-  $kidTag = if ($t.k -eq 1) { "유아·아동 코칭 경력" } else { "초등 저학년부터 지도" }
-  $lowest = if ($t.gr -match "유아") { "유아" } else { "초등 1학년" }
+  $starts = @(); foreach ($gp in ($t.gr -split ",")) { if ($gp -match "^유아") { $starts += 0 } elseif ($gp -match "^초([1-6])") { $starts += [int]$Matches[1] } }
+  $minS = if ($starts.Count) { ($starts | Measure-Object -Minimum).Minimum } else { 1 }
+  $lowest = if ($minS -eq 0) { "유아" } else { "초등 ${minS}학년" }
+  $kidTag = if ($t.k -eq 1) { "유아·아동 코칭 경력" } else { "${lowest}부터 지도" }
 
   # 칩
   $chips = ""
@@ -151,9 +153,9 @@ foreach ($t in $sel) {
     "이동 시간 없이 화면으로 진행하는 실시간 1:1 화상 수업입니다. 전국·해외 어디서나 가능합니다."
   }
 
-  $title = $t.n + " 선생님 · " + $subjLabel + " 유아·초등 저학년 화상과외 · 키즈튜터"
+  $title = $t.n + " 선생님 · " + $subjLabel + " 유아·초등 화상과외 · 키즈튜터"
   $desc  = $lowest + "부터 지도하는 " + $subjLabel + " 1:1 화상 수업 " + $who + ". " + $kidTag + ". " + $t.c + " 수업. 무료 20분 체험으로 아이 반응을 먼저 확인하세요."
-  $kw    = ($subs | ForEach-Object { "유아 " + $_ + " 화상과외, 초등 저학년 " + $_ + " 과외" }) -join ", "
+  $kw    = ($subs | ForEach-Object { "유아 " + $_ + " 화상과외, 초등 " + $_ + " 과외" }) -join ", "
   $url   = "$SITE/teacher-" + $t.i + ".html"
   $grad  = $GRADS[$n % 4]; $n++
 
@@ -193,7 +195,7 @@ foreach ($t in $sel) {
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "$($t.n) 선생님",
-  "jobTitle": "유아·초등 저학년 화상 과외 선생님",
+  "jobTitle": "유아·초등 화상 과외 선생님",
   "url": "$url",
   "knowsAbout": [$(($subs | ForEach-Object { '"' + $_ + '"' }) -join ",")],
   "worksFor": { "@type": "EducationalOrganization", "name": "키즈튜터", "url": "$SITE/" }
@@ -221,7 +223,7 @@ $header
     </div>
     <div class="tsec">
       <h3>이런 아이에게 맞아요</h3>
-      <p class="tdesc">${lowest}부터 $subjLabel 수업이 가능한 선생님입니다. $(if ($t.k -eq 1) { "유아·아동 코칭 경력이 있어 5~7세 아이의 첫 수업, 낯가림이 있는 아이에게 특히 잘 맞습니다." } else { "초등 저학년 지도 경험이 있어 초등 입학 준비, 학교 진도 기초 다지기에 잘 맞습니다." }) 수업은 아이 집중 시간에 맞춰 25~40분으로 진행합니다.</p>
+      <p class="tdesc">${lowest}부터 $subjLabel 수업이 가능한 선생님입니다. $(if ($t.k -eq 1) { "유아·아동 코칭 경력이 있어 5~7세 아이의 첫 수업, 낯가림이 있는 아이에게 특히 잘 맞습니다." } else { "초등 지도 경험이 있어 학교 진도 다지기부터 교과 심화까지 잘 맞습니다." }) 수업은 아이 집중 시간에 맞춰 25~50분으로 진행합니다.</p>
     </div>
 $secHtml    <div class="tsec">
       <h3>수업 형태</h3>
@@ -245,7 +247,7 @@ $secHtml    <div class="tsec">
         <div class="ok-msg" id="tfOk">✅ 신청이 접수되었어요! 24시간 안에 연락드릴게요.</div>
       </form>
     </div>
-    <div class="tback"><a href="teachers.html">← 유아·초등 저학년 선생님 전체 보기</a></div>
+    <div class="tback"><a href="teachers.html">← 유아·초등 선생님 전체 보기</a></div>
   </div>
 </section>
 <section style="background:var(--bg-soft)">
