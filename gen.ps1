@@ -72,6 +72,7 @@ $header = @'
       <a href="index.html#courses">프로그램</a>
       <a href="teachers.html" class="active">선생님 찾기</a>
       <a href="process.html">수업방식</a>
+      <a href="blog.html">블로그</a>
       <a href="index.html#reviews">학부모 후기</a>
       <a href="index.html#faq">자주 묻는 질문</a>
     </nav>
@@ -285,6 +286,19 @@ foreach ($t in $sel) {
   if ($missing -contains $t.i) { continue }
   [void]$sm.AppendLine("  <url><loc>$SITE/teacher-$($t.i).html</loc><lastmod>$today</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>")
 }
+
+# 블로그 글 등 그 외 페이지도 자동 포함.
+# 이 블록이 없으면 gen.ps1 을 돌릴 때마다 sitemap.xml 이 통째로 다시 써지면서
+# 그동안 쓴 블로그 글이 전부 sitemap 에서 사라진다 (파일은 남아서 눈치채기 어려움).
+# 폴더의 *.html 을 훑어서 넣으므로 새 글을 추가해도 여기를 고칠 필요 없음.
+$known = @('index.html', 'teachers.html', 'process.html')
+$extra = @(Get-ChildItem -Path $root -Filter *.html -File |
+  Where-Object { $_.Name -notlike 'teacher-*' -and $known -notcontains $_.Name } |
+  Sort-Object Name)
+foreach ($f in $extra) {
+  $pri = if ($f.Name -eq 'blog.html') { '0.8' } else { '0.7' }
+  [void]$sm.AppendLine("  <url><loc>$SITE/$($f.Name)</loc><lastmod>$today</lastmod><changefreq>weekly</changefreq><priority>$pri</priority></url>")
+}
 [void]$sm.AppendLine('</urlset>')
 [IO.File]::WriteAllText((Join-Path $root "sitemap.xml"), $sm.ToString(), $utf8)
-Write-Host "sitemap.xml: $($made + 3) URL"
+Write-Host "sitemap.xml: $($made + 3 + $extra.Count) URL (블로그 등 추가 페이지 $($extra.Count)개 포함)"
