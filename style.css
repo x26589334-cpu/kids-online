@@ -696,8 +696,7 @@ header{background:rgba(255,244,228,.92);border-bottom:3px solid var(--edge)}
 /* ---------- 섹션 바탕 번갈아 ---------- */
 section{padding:76px 0}
 #ages{background:var(--bg)}
-#courses{background:var(--mint-soft)}
-#how{background:var(--bg)}
+/* (#courses·#how 는 #process 로 통합됨) */
 .why,#why{background:var(--sky-soft)}
 #teachers{background:var(--bg)}
 #reviews{background:var(--pink-soft)}
@@ -801,3 +800,15 @@ footer ul a:hover{color:var(--sun)}
 
 /* 선생님 상세 지정상담 폼 — .tform form 이 더 구체적이라 따로 맞춰줌 */
 .tform form{border:3px solid var(--edge);box-shadow:var(--pop);border-radius:var(--radius-sm)}
+
+/* ---------- 수업방식 통합 섹션 (#process) 안의 소제목 ----------
+   프로그램·준비물·수업 길이·진행 흐름 네 덩어리가 한 섹션 안에 있어서
+   덩어리마다 작은 제목이 필요함. 섹션 제목(h2.title)보다 한 단계 작게. */
+#process{background:var(--mint-soft)}
+.psub{margin-top:64px}
+.psub h3{font-family:"Jua","Pretendard Variable",Pretendard,sans-serif;font-weight:400;letter-spacing:0;font-size:clamp(21px,3vw,27px);line-height:1.3}
+.psub p{color:var(--ink-soft);font-size:15.5px;margin:8px auto 0;max-width:560px}
+#process .cards,#process .steps{margin-top:26px}
+#process .lesson{margin-top:26px}
+#process .ctable{margin-top:22px}
+@media(max-width:860px){.psub{margin-top:48px}}

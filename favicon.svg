@@ -1,14 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#ff7a1f"/>
-      <stop offset="1" stop-color="#ffa94d"/>
-    </linearGradient>
-  </defs>
-  <rect width="64" height="64" rx="18" fill="url(#g)"/>
-  <circle cx="32" cy="27" r="11" fill="#fff"/>
-  <path d="M14 54c2-11 9-16 18-16s16 5 18 16z" fill="#fff"/>
-  <circle cx="27.5" cy="26" r="1.8" fill="#ff7a1f"/>
-  <circle cx="36.5" cy="26" r="1.8" fill="#ff7a1f"/>
-  <path d="M27 31.5q5 4 10 0" stroke="#ff7a1f" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="6 8 128 128">
+  <!-- 키즈튜터 마스코트 "키투" — index.html 히어로의 곰돌이와 같은 도형 (그림자만 뺌) -->
+  <path d="M68 30C64 12 80 8 84 20" fill="none" stroke="#4a3524" stroke-width="5" stroke-linecap="round" />
+  <circle cx="30" cy="36" r="14" fill="#ffb27a" stroke="#4a3524" stroke-width="5" />
+  <circle cx="110" cy="36" r="14" fill="#ffb27a" stroke="#4a3524" stroke-width="5" />
+  <ellipse cx="70" cy="83" rx="50" ry="51" fill="#ff9a3c" stroke="#4a3524" stroke-width="5" />
+  <ellipse cx="40" cy="93" rx="10" ry="7" fill="#ff8fb8" />
+  <ellipse cx="100" cy="93" rx="10" ry="7" fill="#ff8fb8" />
+  <ellipse cx="55" cy="75" rx="8.5" ry="10.5" fill="#4a3524" />
+  <ellipse cx="85" cy="75" rx="8.5" ry="10.5" fill="#4a3524" />
+  <circle cx="58" cy="71" r="3.2" fill="#ffffff" />
+  <circle cx="88" cy="71" r="3.2" fill="#ffffff" />
+  <path d="M61 98q9 9 18 0" fill="none" stroke="#4a3524" stroke-width="4.5" stroke-linecap="round" />
 </svg>
