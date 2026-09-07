@@ -15,18 +15,23 @@ git push
 → GitHub Pages 설정 후 1~2분 뒤 반영. (저장소·Pages 설정은 아래 "처음 배포" 참고)
 
 ## 파일 구조
-- `index.html` — 홈 (히어로/연령별 탭/프로그램 6종/수업 흐름/걱정 해결/선생님 미리보기/후기/FAQ/무료 체험 신청 폼)
+- `index.html` — 홈 (히어로 / 연령별 탭 `#ages` / **수업방식 `#process`** = 프로그램 6종·준비물·수업 길이표·진행 흐름·한 회차 / 걱정 해결 / 선생님 미리보기 / 후기 / FAQ / 신청 폼)
 - `teachers.html` — 선생님 찾기 (검색 + 필터: 대상(유아·아동 코칭 경력/초1부터)/과목/성별/수업형태, 24명씩 페이지네이션). `?s=영어`, `?kid=1` 로 필터 진입 가능
 - `teacher-{id}.html` — 선생님 개별 페이지 (**gen.ps1 로 자동 생성**, 손으로 고치지 말 것)
-- `process.html` — 수업방식 (준비물/수업 길이표/진행 흐름/관리/상담 폼)
+- `process.html` — **리다이렉트 전용** (2026-09-05 내용을 홈 `#process` 로 통합). 선생님 515장·블로그·검색엔진이 링크해서 파일은 남김. sitemap 에서 뺐고 gen.ps1 `$known` 에 있어 자동으로 다시 들어가지도 않음
 - `teachers-data.js` — `window.TEACHERS=[{i,n,g,c,s,gr,r,sd,k}]` (gen.ps1 생성. k=1 이면 유아·아동 코치)
 - `teachers-search.js` — 검색 색인 `window.TSEARCH` (gen.ps1 생성, defer 로드)
 - `style.css` — gwaoe-page/style.css 를 복사해 토큰만 키즈 팔레트로 바꾸고, 끝에 "키즈 전용 추가" 블록을 붙인 것
-  - ⚠️ 수정 시 전 페이지의 `style.css?v=` 숫자 올리기 (현재 v1)
+  - ⚠️ 수정 시 전 페이지의 `style.css?v=` 숫자 올리기 (현재 v3)
 - `script.js` — gwaoe-page 와 동일 (reveal, paginate)
-- `form.js` — 신청 폼 → 구글 시트. 과외·픽포스·데일리카네기와 **같은 공용 Apps Script 웹앱** → "웹 문의" 시트의 **"키즈 튜터" 탭**(`sheet=키즈 튜터` 전송, 구분 `키즈튜터-무료체험신청` 등). 참고 사본 `google-apps-script.gs` (허용 탭 목록 버전이면 `"키즈 튜터": true` 추가 필요)
+- `form.js` — 신청 폼 → 구글 시트. 과외(gwaoe-page)·공부의온도(tutoring-site)·채용(vine-recruit)·데일리카네기·서포트포스(pickpos)와 **같은 공용 웹앱 하나**(총 6개 사이트) → "웹 문의" 시트의 **"키즈 튜터" 탭**(띄어쓰기 포함, `sheet=키즈 튜터` 전송, 구분 `키즈튜터-무료체험신청` 등)
+  - 실제 스크립트는 **구글 서버**(script.google.com, 계정 x26589334@gmail.com)에 있음. 저장소의 `google-apps-script.gs` 는 **참고용 사본이라 고쳐도 동작 안 바뀜**
+  - 배포본에 **허용 탭 목록이 없어서** `sheet` 값이 그대로 탭 이름이 됨 → 오타 시 기본 탭("과외")으로 안 가고 **새 탭이 조용히 생김**. 탭 이름 건드렸으면 실제 시트 확인 필수
+  - 2026-09-03 실제 제출 테스트로 "키즈 튜터" 탭 정상 도착 확인 (폼 3종·선생님 페이지 515개 전부 정상)
 - `gen.ps1` — 선생님 데이터/페이지/sitemap 생성기 · `make-images.ps1` — og-image.png / apple-touch-icon.png 생성기
 - `sitemap.xml` (gen.ps1 생성) / `robots.txt` / `favicon.svg`
+- **상단 메뉴 5개** (2026-09-05 정리): 홈 · 선생님 찾기 · 수업방식(`index.html#process`) · 블로그 · 자주 묻는 질문. 연령별·프로그램·학부모 후기는 메뉴에서 뺐지만 섹션은 홈에 남아 있음. 메뉴는 `gen.ps1` 의 `$header` 템플릿에도 있으니 바꿀 땐 같이 바꿀 것
+- `favicon.svg` = 마스코트 **키투** (index.html 히어로 인라인 SVG 와 같은 도형, 그림자만 뺌). `apple-touch-icon.png` 는 `make-images.ps1` 산출물이라 아직 옛 "K" 로고 — 바꾸려면 그 스크립트를 고쳐야 함
 
 ## 디자인
 - 팔레트: 주황 `--brand:#ff7a1f` / 살구 `--brand-2:#ffa94d` / 민트 `--accent:#1fb59b` / 노랑 `--sun:#ffd166` / 잉크 `#1e2a3f` / 바탕 `#fff7ee`
@@ -48,6 +53,39 @@ git push
 1. GitHub 에 `kids-online` 저장소 생성: `gh repo create kids-online --public --source=. --push` (gh 는 `C:\Program Files\GitHub CLI\gh.exe`)
 2. 저장소 Settings → Pages → Branch: main / (root)
 3. 도메인 연결 시 `CNAME` 파일에 도메인 한 줄 + DNS 에 CNAME 레코드(`x26589334-cpu.github.io`)
+
+
+## 블로그 (SEO 콘텐츠) — 2026-09-04 신설
+- `blog.html` — 글 목록. 맨 위 주석에 **새 글 카드 추가 형식**이 그대로 들어 있으니 복사해서 `blogList` 맨 위에 붙이면 됨
+- 글 파일 10편 — `hangul-*.html`·`number-*.html` 5편(국내 유아 한글떼기·숫자놀이), `overseas-*.html` 5편(해외 거주 가정). 새 글은 **기존 글 하나를 복사해서 내용만 교체**하는 게 가장 빠름
+- **묶음 균형을 보세요.** 한 묶음만 몰아 쓰면 사이트 성격이 그쪽으로만 보입니다(해외 5편만 있을 때 재외국민 전용처럼 보였음). 주 단위로 묶음을 바꾸되 국내:해외 비중을 유지할 것
+- 글 한 편 규격: 본문 2,000~3,000자 · `<h2>` 3~4개 · `.article` 클래스 · 끝에 `.hl-box` + "이런 글도 함께 보세요"(같은 묶음 글끼리 내부 링크) + CTA 섹션
+- **CSS는 추가로 안 써도 됨.** `.blog .bpost .article .hl-box` 가 style.css 에 이미 있음(gwaoe-page 에서 복사됨) + 스티커북 테마도 함께 적용됨
+
+### ⚠️ sitemap 함정 (2026-09-04 수정 완료)
+`gen.ps1` 은 sitemap.xml 을 **통째로 다시 쓴다.** 원래는 홈·teachers·process·teacher-*.html 만 넣어서,
+블로그 글을 아무리 써도 `gen.ps1` 을 한 번 돌리면 sitemap 에서 전부 사라졌다(파일은 남아서 눈치 못 챔).
+→ 지금은 폴더의 `*.html` 을 훑어서 자동으로 넣도록 고쳐 놨으므로 **새 글을 추가해도 gen.ps1 을 손댈 필요 없다.**
+이 블록(`$extra` 변수 부분)을 지우면 함정이 되살아나니 건드리지 말 것.
+
+### 글감 선정 원칙 — 없는 수업으로 유입시키지 말 것
+선생님 과목 데이터는 **국어·수학·영어·과학·사회·코딩 6개뿐**이다(`teachers-data.js` 의 `s` 필드).
+- 사고력수학 · 논술 · 토론 · 한자 = **0명.** 원본 gwaoe-page 750명에도 없다. 이 키워드로 글 쓰면 들어와서 바로 이탈 → 순위 하락
+- "코딩" 23명은 `gr` 자리에 **JavaScript/Python** 이 들어 있다(학년 아님). 원본은 "하우코딩(JS) 수업가능" — **유아·초등용 엔트리/스크래치가 아니다.** 초등 코딩 카드 만들지 말 것
+- 지역 키워드: 방문+화상 132명 중 **유아까지 가르치는 건 8명뿐**이라 "지역+유아"는 근거 없음. 지역은 **초등**으로만, 그리고 ① 해외 도시 ② "우리 동네엔 학원이 없다" ③ 방문 겸업 시군구(3명 이상 28곳) 세 갈래에서만 자연스럽다
+
+
+## 동네 페이지 (region-*.html) — 2026-09-07 신설
+- `gen-region.ps1` 이 `local-places.csv` + `teachers-data.js` 를 읽어 `region-{시도}-{시군구}.html` 을 만든다
+- **`local-places.csv` 형식:** `지역,동,종류,이름` (종류 = 유치원 / 어학원)
+  - `지역` 은 `teachers-data.js` 의 `r`(방문지역) 값과 **글자가 똑같아야** 그 지역 선생님이 함께 실린다 (예: `서울 노원구`)
+  - CSV 에 있는 지역만 페이지가 생긴다. 줄만 추가하고 아래 명령을 다시 돌리면 됨
+  ```
+  printf '\xEF\xBB\xBF' | cat - gen-region.ps1 > _r.ps1 && powershell -NoProfile -ExecutionPolicy Bypass -File _r.ps1 && rm _r.ps1
+  ```
+- 지역 후보: 방문 겸업 선생님이 있는 시군구 **105곳** (5명 이상 8곳 / 3~4명 20곳). `teachers-data.js` 의 `r` 값 분포로 확인
+- ⚠️ **어학원 이름은 경쟁 업체 상호**다. 2026-09-07 사용자가 위험을 인지하고 넣기로 결정함. 네이버 저품질·분쟁 소지가 있어 문제 생기면 CSV 에서 `어학원` 줄만 지우고 다시 돌리면 즉시 걷힌다
+- 유치원·어학원 목록은 공공데이터포털 [전국유치원표준데이터](https://www.data.go.kr/data/15096279/standard.do) 등에서 받아야 함. **API 는 인증키 필수라 Claude 가 직접 못 받는다** (무인증 호출 시 `-401 인증키는 필수 항목 입니다`)
 
 ## 다음에 할 후보
 - 가비아 DNS: A 레코드 185.199.108.153 / .109.153 / .110.153 / .111.153 + www CNAME x26589334-cpu.github.io → GitHub Pages 에서 HTTPS 강제

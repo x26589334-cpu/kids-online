@@ -1,31 +1,41 @@
 /* =========================================================================
-   구글 "웹 문의" 시트 공용 Apps Script — 사이트별 탭 저장 (참고용 사본)
+   구글 "웹 문의" 시트 공용 Apps Script — 사이트별 탭 저장
+   (2026-09-03 실제 배포본과 동기화한 사본. 이 파일을 고쳐도 동작은 안 바뀜)
    -------------------------------------------------------------------------
-   과외(perfectedu)·키즈튜터·픽포스·데일리카네기 폼이 모두 이 웹앱 하나로 보냅니다.
-   폼이 sheet=탭이름 을 함께 보내면 해당 탭에, 없거나 허용 목록에 없으면 기본 탭("과외")에 저장.
-   키즈튜터 폼(form.js)은 sheet=키즈 튜터, _form=키즈튜터-무료체험신청 등을 보냅니다.
+   ▶ 실제 코드 위치: https://script.google.com (구글계정 x26589334@gmail.com)
+     또는 "웹 문의" 시트 → 확장 프로그램 → Apps Script
+     ※ 이 저장소의 파일은 참고용 사본일 뿐. 진짜 코드는 구글 서버에 있음.
 
-   ▶ 수정 반영 방법 (URL 유지)
-   Apps Script 편집기에서 코드 교체 → 저장 → [배포] → [배포 관리]
-   → 기존 배포 연필(수정) → 버전: 새 버전 → [배포]
+   ▶ 이 웹앱(AKfycbznAb0…) 하나를 6개 사이트가 공용으로 씁니다 — 건드리면 전부 영향
+       과외       = perfectedu.co.kr    (gwaoe-page)     → "과외" 탭
+       공부의온도  = firststudy.co.kr    (tutoring-site)  → "공부의온도" 탭
+       채용       = vinemarketing.co.kr (vine-recruit)   → "채용" 탭
+       데일리카네기 = dailycarnegie.com   (daily-carnegie) → "데일리카네기" 탭
+       키즈튜터    = kidstutor.co.kr     (kids-online)    → "키즈 튜터" 탭 (띄어쓰기!)
+       서포트포스  = hsupporter.com      (pickpos)        → "견적" 탭
+     (thebetteredu / intl-school-tutoring / wawa-renewal 은 각자 별도 웹앱)
+     doGet 문구가 "vine recruit" 인 건 채용 사이트용으로 처음 만든 흔적.
+
+   ▶ 주의 1: 허용 탭 목록(화이트리스트)이 없습니다.
+     폼이 보낸 sheet 값이 그대로 탭 이름이 되고, 없으면 새로 만듭니다.
+     → form.js 의 탭 이름에 오타가 나면 기본 탭("과외")으로 떨어지지 않고
+       오타 이름의 새 탭이 조용히 생기니, 수정 후 반드시 실제 탭을 확인할 것.
+
+   ▶ 주의 2: 수정 반영은 URL 유지 방식으로만
+     편집기에서 코드 교체 → 저장 → [배포] → [배포 관리]
+     → 기존 배포 연필(수정) → 버전: 새 버전 → [배포]
+     ※ "새 배포" 를 누르면 새 URL 이 생기고, 옛 URL 은 옛 버전 코드로 계속 돌아감
+       (2026-09-02 상담이 "업무소통" 탭에 쌓인 사고의 원인). 6개 사이트가 전부 먹통.
    ========================================================================= */
 
 var SHEET_ID   = "1UUS6le8gJTsuvaSDi31ZzuQjA214YD32xJFVgYx9cno";
-var SHEET_NAME = "과외"; // sheet 값이 없거나 허용 목록에 없을 때 기본 탭
-
-// 사이트별 탭 (새 사이트 추가 시 여기에 한 줄 추가)
-var ALLOWED_TABS = {
-  "과외": true,         // 티칭코칭(perfectedu)
-  "견적": true,         // 픽포스
-  "데일리카네기": true, // 데일리카네기 입학 상담
-  "키즈 튜터": true     // 키즈튜터(kidstutor.co.kr) 무료 체험·상담
-};
+var SHEET_NAME = "과외"; // sheet 값이 없을 때 기본 탭
 
 function doPost(e) {
   try {
     var ss = SpreadsheetApp.openById(SHEET_ID);
     var p  = (e && e.parameter) ? e.parameter : {};
-    var tab = (p.sheet && ALLOWED_TABS[p.sheet]) ? p.sheet : SHEET_NAME;
+    var tab = p.sheet || SHEET_NAME;
     var sh = ss.getSheetByName(tab) || ss.insertSheet(tab);
     var when = p._time || new Date().toLocaleString("ko-KR");
     var kind = p._form || "";
@@ -51,4 +61,8 @@ function doPost(e) {
   } catch (err) {
     return ContentService.createTextOutput("error: " + err);
   }
+}
+
+function doGet() {
+  return ContentService.createTextOutput("ok - vine recruit endpoint alive");
 }
