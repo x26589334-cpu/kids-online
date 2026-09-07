@@ -83,6 +83,15 @@ git push
   ```
   printf '\xEF\xBB\xBF' | cat - gen-region.ps1 > _r.ps1 && powershell -NoProfile -ExecutionPolicy Bypass -File _r.ps1 && rm _r.ps1
   ```
+- `import-places.ps1` — **공공데이터 CSV → local-places.csv 변환기.** 받은 파일을 손질 없이 그대로 넣으면 됨
+  ```
+  printf '\xEF\xBB\xBF' | cat - import-places.ps1 > _i.ps1 && powershell -NoProfile -ExecutionPolicy Bypass -File _i.ps1 -Csv "받은파일.csv" -Type "유치원" && rm _i.ps1
+  ```
+  - 컬럼 이름(유치원명/학원명/사업장명, 소재지도로명주소/주소…)과 인코딩(UTF-8/CP949)을 **자동으로 찾는다**
+  - 주소를 `서울특별시 노원구` → `서울 노원구`, `경기도 고양시 덕양구` → `경기 고양 덕양구` 로 바꿔 선생님 데이터의 `r` 값과 맞춘다
+  - **선생님이 방문 가능한 105곳 지역만 통과**시키고 나머지는 버린다 (실을 선생님이 없는 페이지를 안 만들려고)
+  - 중복은 건너뛰므로 여러 번 돌려도 안전. 어학원은 `-Type "어학원"` 으로
+  - 2026-09-07 가짜 공공데이터 CSV로 동작 확인 완료 (인코딩 감지·지역 정규화·동 추출·중복 제거 전부 정상)
 - 지역 후보: 방문 겸업 선생님이 있는 시군구 **105곳** (5명 이상 8곳 / 3~4명 20곳). `teachers-data.js` 의 `r` 값 분포로 확인
 - ⚠️ **어학원 이름은 경쟁 업체 상호**다. 2026-09-07 사용자가 위험을 인지하고 넣기로 결정함. 네이버 저품질·분쟁 소지가 있어 문제 생기면 CSV 에서 `어학원` 줄만 지우고 다시 돌리면 즉시 걷힌다
 - 유치원·어학원 목록은 공공데이터포털 [전국유치원표준데이터](https://www.data.go.kr/data/15096279/standard.do) 등에서 받아야 함. **API 는 인증키 필수라 Claude 가 직접 못 받는다** (무인증 호출 시 `-401 인증키는 필수 항목 입니다`)
