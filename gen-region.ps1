@@ -146,10 +146,10 @@ foreach ($region in ($places | Select-Object -ExpandProperty 지역 -Unique | So
 
   # ---- 문구 ----
   $kNames = if ($kinder.Count -gt 0) { (($kinder | Select-Object -First 4 | ForEach-Object { $_.이름 }) -join ", ") } else { "" }
-  $title = "$short 유아·초등 1:1 과외 · 화상수업 | 키즈튜터"
+  $title = "$region 유아·초등 1:1 과외 · 화상수업 | 키즈튜터"
   $desc  = "$region 유아·초등 1:1 화상과외. 한글 떼기·파닉스·연산·독서를 아이 한 명만 보고 25~50분씩 수업합니다."
   if ($kNames) { $desc += " $kNames 등 $short 유치원 학부모님이 찾으십니다." }
-  $kw = "$short 유아과외, $short 초등과외, $short 한글과외, $short 파닉스, $short 화상과외, $sido 유아 과외"
+  $kw = "$region 유아과외, $region 초등과외, $region 한글과외, $region 파닉스, $region 화상과외, $short 유아과외, $short 초등 과외, $sido 유아 과외"
   if ($kinder.Count -gt 0) { $kw += ", " + (($kinder | Select-Object -First 8 | ForEach-Object { $_.이름 }) -join ", ") }
   if ($academy.Count -gt 0) { $kw += ", " + (($academy | Select-Object -First 5 | ForEach-Object { $_.이름 }) -join ", ") }
 
@@ -206,8 +206,8 @@ $tBlock  </div>
 $header
 <section class="page-hero">
   <div class="wrap">
-    <div class="crumb"><a href="index.html">홈</a> › <a href="teachers.html">선생님 찾기</a> › $(Esc $short)</div>
-    <h1>$(Esc $short) 유아·초등<br>1:1 화상과외</h1>
+    <div class="crumb"><a href="index.html">홈</a> › <a href="teachers.html">선생님 찾기</a> › $(Esc $region)</div>
+    <h1>$(Esc $region) 유아·초등<br>1:1 화상과외</h1>
     <p>한글 떼기, 파닉스, 연산, 독서, 초등 입학 준비까지. 유아·아동을 오래 가르쳐 온 선생님이 아이 한 명만 보고 25~50분씩 수업합니다. 집에서 태블릿 하나로 시작하세요.</p>
   </div>
 </section>
