@@ -50,7 +50,13 @@ function ToRegion([string]$addr) {
   $t = ($addr -replace '\s+', ' ').Trim()
   $parts = $t -split ' '
   if ($parts.Count -lt 2) { return $null }
-  $sido = $sidoMap[$parts[0]]
+  # 2026년 자료부터 광주+전남이 "전남광주통합특별시" 한 덩어리로 나온다.
+  # 광주는 구(區)가 5개뿐이고 전남에는 구가 없으므로 그것으로 갈라낸다.
+  if ($parts[0] -eq "전남광주통합특별시") {
+    if ($parts[1] -match "^(동구|서구|남구|북구|광산구)$") { $sido = "광주" } else { $sido = "전남" }
+  } else {
+    $sido = $sidoMap[$parts[0]]
+  }
   if (-not $sido) { return $null }
   # 시/군/구 조각 모으기 ("고양시 덕양구" 처럼 두 개일 수 있음)
   $names = @()
