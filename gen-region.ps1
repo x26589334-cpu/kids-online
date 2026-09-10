@@ -49,6 +49,7 @@ $header = @'
     <nav class="nav-links">
       <a href="index.html">홈</a>
       <a href="teachers.html">선생님 찾기</a>
+      <a href="regions.html">우리 동네</a>
       <a href="index.html#process">수업방식</a>
       <a href="blog.html">블로그</a>
       <a href="index.html#faq">자주 묻는 질문</a>
@@ -71,6 +72,7 @@ $footer = @'
       <ul>
         <li><a href="index.html#ages">연령별 수업</a></li>
         <li><a href="teachers.html">선생님 찾기</a></li>
+        <li><a href="regions.html">우리 동네</a></li>
         <li><a href="index.html#process">수업방식</a></li>
         <li><a href="blog.html">블로그</a></li>
       </ul>
@@ -200,7 +202,7 @@ $tBlock  </div>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&display=swap" />
-<link rel="stylesheet" href="style.css?v=4" />
+<link rel="stylesheet" href="style.css?v=5" />
 </head>
 <body>
 $header
@@ -248,3 +250,109 @@ $footer
   $made++
 }
 Write-Host "동네 페이지 $made 개 생성 완료"
+
+# ---------- 동네 목록 페이지 (regions.html) ----------
+# 만들어진 동네 페이지로 들어가는 '문'. 이게 없으면 102장이 sitemap 에만 있고
+# 사이트 안에서 이동할 길이 없어 검색엔진이 중요하지 않은 페이지로 본다.
+# 지역이 늘면 이 스크립트를 다시 돌리기만 하면 목록도 같이 갱신된다.
+$idx = @()
+foreach ($region in ($places | Select-Object -ExpandProperty 지역 -Unique | Sort-Object)) {
+  $rows = @($places | Where-Object { $_.지역 -eq $region })
+  $kc = @($rows | Where-Object { $_.종류 -eq "유치원" }).Count
+  $ac = @($rows | Where-Object { $_.종류 -eq "어학원" }).Count
+  if ($kc -eq 0 -and $ac -eq 0) { continue }
+  $tc = @($teachers | Where-Object { $_.r -and (($_.r -split '\|') -contains $region) }).Count
+  $parts = $region -split '\s+'
+  $idx += [pscustomobject]@{
+    region = $region; sido = $parts[0]; short = ($parts[1..($parts.Count-1)] -join " ")
+    file = "region-" + (Slug $region) + ".html"; k = $kc; a = $ac; t = $tc
+  }
+}
+
+$sidoOrder = @("서울","경기","인천","부산","대구","광주","대전","울산","세종","강원","충북","충남","전북","전남","경북","경남","제주")
+$body = ""
+foreach ($sd in $sidoOrder) {
+  $group = @($idx | Where-Object { $_.sido -eq $sd } | Sort-Object short)
+  if ($group.Count -eq 0) { continue }
+  $body += "  <div class=`"wrap`" style=`"margin-top:34px`">`n"
+  $body += "    <h3 class=`"sido-head`">$sd <span class=`"cnt`">$($group.Count)곳</span></h3>`n"
+  $body += "    <div class=`"navcards`">`n"
+  foreach ($g in $group) {
+    $body += "      <a class=`"navcard`" href=`"$($g.file)`"><span class=`"e`">📍</span><b>$(Esc $g.short)</b><span>유치원 $($g.k) · 어학원 $($g.a)</span></a>`n"
+  }
+  $body += "    </div>`n  </div>`n"
+}
+
+$totK = ($idx | Measure-Object -Property k -Sum).Sum
+$totA = ($idx | Measure-Object -Property a -Sum).Sum
+$sidoNames = (($sidoOrder | Where-Object { @($idx | Where-Object { $_.sido -eq $_ }).Count -ge 0 }) -join " ")
+
+$rTitle = "우리 동네 유아·초등 1:1 과외 · 전국 $($idx.Count)곳 | 키즈튜터"
+$rDesc  = "전국 $($idx.Count)개 동네의 유치원 $totK 곳과 영어학원 $totA 곳, 그리고 그 지역에 방문도 가능한 선생님을 함께 정리했습니다. 화상 수업은 전국·해외 어디서나 가능합니다."
+
+$rPage = @"
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>$(Esc $rTitle)</title>
+<meta name="description" content="$(Esc $rDesc)" />
+<meta name="keywords" content="동네 유아과외, 지역별 초등과외, 우리 동네 유치원, 동네 영어학원, 유아 화상과외, 초등 화상과외" />
+<link rel="canonical" href="$SITE/regions.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="키즈튜터" />
+<meta property="og:title" content="$(Esc $rTitle)" />
+<meta property="og:description" content="$(Esc $rDesc)" />
+<meta property="og:url" content="$SITE/regions.html" />
+<meta property="og:image" content="$SITE/og-image.png" />
+<meta property="og:locale" content="ko_KR" />
+<meta name="robots" content="index,follow" />
+<meta name="theme-color" content="#ff7a1f" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<link rel="preconnect" href="https://fastly.jsdelivr.net" crossorigin />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&display=swap" />
+<link rel="stylesheet" href="style.css?v=5" />
+</head>
+<body>
+$header
+<section class="page-hero">
+  <div class="wrap">
+    <div class="crumb"><a href="index.html">홈</a> › 우리 동네</div>
+    <h1>우리 동네<br>유아·초등 1:1 과외</h1>
+    <p>전국 $($idx.Count)개 동네의 유치원 $totK 곳과 영어학원 $totA 곳을 동별로 정리했습니다. 수업은 화상이라 전국 어디서나 되고, 동네에 따라 방문도 가능한 선생님이 있습니다.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap center">
+    <span class="eyebrow">지역 선택</span>
+    <h2 class="title">사시는 동네를 골라 주세요</h2>
+    <p class="lead">아이가 다니는 유치원이나 학원 이름을 상담에서 말씀해 주시면 수업 시간대를 그에 맞춰 잡아 드려요.</p>
+  </div>
+$body</section>
+
+<section style="background:var(--bg-soft)">
+  <div class="wrap center">
+    <h2 class="title">우리 동네가 목록에 없어도 됩니다</h2>
+    <p class="lead center">화상 수업이라 인터넷만 되면 전국·해외 어디서나 가능합니다. 목록은 방문도 가능한 선생님이 있는 동네만 모아 둔 것이에요.</p>
+    <div class="hero-cta" style="justify-content:center;margin-top:24px">
+      <a href="index.html#apply" class="btn btn-primary">🎁 무료 20분 체험 신청</a>
+      <a href="teachers.html" class="btn btn-ghost">선생님 전체 보기</a>
+    </div>
+  </div>
+</section>
+$footer
+<div class="float-cta">
+  <a href="index.html#apply" class="btn btn-primary">🎁 무료 체험 신청</a>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
+"@
+[IO.File]::WriteAllText((Join-Path $root "regions.html"), $rPage, $utf8)
+Write-Host "regions.html: $($idx.Count)개 동네 (유치원 $totK · 어학원 $totA)"

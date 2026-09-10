@@ -820,3 +820,10 @@ footer ul a:hover{color:var(--sun)}
 .pgroup span{color:var(--ink-soft);font-size:14.5px;line-height:1.85}
 .lesson h3 .cnt{font-family:"Gaegu","Jua",sans-serif;font-size:16px;color:var(--brand-ink);margin-left:6px}
 @media(max-width:560px){.pgroup{flex-direction:column;gap:4px}.pgroup b{min-width:0}}
+
+/* ---------- 동네 목록(regions.html): 시도 제목 ---------- */
+.sido-head{font-family:"Jua","Pretendard Variable",Pretendard,sans-serif;font-weight:400;font-size:22px;color:var(--ink);margin-bottom:14px;display:flex;align-items:baseline;gap:8px}
+.sido-head .cnt{font-family:"Gaegu","Jua",sans-serif;font-size:16px;color:var(--brand-ink)}
+.navcard .e{font-size:22px}
+.navcard b{font-size:15.5px}
+.navcard span:last-child{font-size:12.5px}
