@@ -39,6 +39,18 @@ foreach ($m in $rx.Matches($tjs)) {
 }
 Write-Host "선생님 $($teachers.Count)명 읽음"
 
+# ---------- 2-2) 동네 사진 (region-photos.csv) ----------
+# 위키미디어 공용에서 고른 사진. 라이선스가 CC 계열이라 저작자·라이선스 표기가 의무다.
+# 표기는 figcaption 에 자동으로 들어가므로 CSV 의 작성자/라이선스 칸을 비우지 말 것.
+$photos = @{}
+$photoPath = Join-Path $root "region-photos.csv"
+if (Test-Path $photoPath) {
+  foreach ($p in @(Import-Csv -Path $photoPath -Encoding UTF8)) {
+    if ($p.지역 -and $p.썸네일) { $photos[$p.지역.Trim()] = $p }
+  }
+}
+Write-Host "동네 사진: $($photos.Count)곳"
+
 function Esc([string]$s) { return $s.Replace("&","&amp;").Replace('"',"&quot;").Replace("<","&lt;").Replace(">","&gt;") }
 function Slug([string]$s) { return ($s -replace '\s+', '-') }
 
@@ -146,6 +158,22 @@ foreach ($region in ($places | Select-Object -ExpandProperty 지역 -Unique | So
     }
   }
 
+  # ---- 동네 사진 (있는 곳만) ----
+  $photoBlock = ""
+  if ($photos.ContainsKey($region)) {
+    $ph = $photos[$region]
+    $photoBlock = @"
+<section style="padding:0 0 10px">
+  <div class="wrap">
+    <figure class="rphoto">
+      <img src="$(Esc $ph.썸네일)" alt="$(Esc $region) 풍경" loading="lazy" onerror="this.parentNode.style.display='none'" />
+      <figcaption>📷 $(Esc $ph.제목) — 사진 $(Esc $ph.작성자) · <a href="$(Esc $ph.출처)" target="_blank" rel="noopener nofollow">$(Esc $ph.라이선스)</a> · 위키미디어 공용</figcaption>
+    </figure>
+  </div>
+</section>
+"@
+  }
+
   # ---- 문구 ----
   $kNames = if ($kinder.Count -gt 0) { (($kinder | Select-Object -First 4 | ForEach-Object { $_.이름 }) -join ", ") } else { "" }
   $title = "$region 유아·초등 1:1 과외 · 화상수업 | 키즈튜터"
@@ -202,7 +230,7 @@ $tBlock  </div>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&display=swap" />
-<link rel="stylesheet" href="style.css?v=6" />
+<link rel="stylesheet" href="style.css?v=7" />
 </head>
 <body>
 $header
@@ -213,6 +241,7 @@ $header
     <p>한글 떼기, 파닉스, 연산, 독서, 초등 입학 준비까지. 유아·아동을 오래 가르쳐 온 선생님이 아이 한 명만 보고 25~50분씩 수업합니다. 집에서 태블릿 하나로 시작하세요.</p>
   </div>
 </section>
+$photoBlock
 $tSection
 <section style="background:var(--bg-soft)">
   <div class="wrap">
@@ -316,7 +345,7 @@ $rPage = @"
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&display=swap" />
-<link rel="stylesheet" href="style.css?v=6" />
+<link rel="stylesheet" href="style.css?v=7" />
 </head>
 <body>
 $header
