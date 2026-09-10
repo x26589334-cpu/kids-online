@@ -202,7 +202,7 @@ $tBlock  </div>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&display=swap" />
-<link rel="stylesheet" href="style.css?v=5" />
+<link rel="stylesheet" href="style.css?v=6" />
 </head>
 <body>
 $header
@@ -274,11 +274,11 @@ $body = ""
 foreach ($sd in $sidoOrder) {
   $group = @($idx | Where-Object { $_.sido -eq $sd } | Sort-Object short)
   if ($group.Count -eq 0) { continue }
-  $body += "  <div class=`"wrap`" style=`"margin-top:34px`">`n"
+  $body += "  <div class=`"wrap`" style=`"margin-top:26px`">`n"
   $body += "    <h3 class=`"sido-head`">$sd <span class=`"cnt`">$($group.Count)곳</span></h3>`n"
-  $body += "    <div class=`"navcards`">`n"
+  $body += "    <div class=`"rgrid`">`n"
   foreach ($g in $group) {
-    $body += "      <a class=`"navcard`" href=`"$($g.file)`"><span class=`"e`">📍</span><b>$(Esc $g.short)</b><span>유치원 $($g.k) · 어학원 $($g.a)</span></a>`n"
+    $body += "      <a class=`"rcard`" href=`"$($g.file)`"><b>$(Esc $g.short)</b><span>유치원 $($g.k) · 어학원 $($g.a)</span></a>`n"
   }
   $body += "    </div>`n  </div>`n"
 }
@@ -316,7 +316,7 @@ $rPage = @"
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&display=swap" />
-<link rel="stylesheet" href="style.css?v=5" />
+<link rel="stylesheet" href="style.css?v=6" />
 </head>
 <body>
 $header
