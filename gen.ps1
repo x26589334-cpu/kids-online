@@ -294,7 +294,10 @@ $extra = @(Get-ChildItem -Path $root -Filter *.html -File |
   Sort-Object Name)
 foreach ($f in $extra) {
   $pri = if ($f.Name -eq 'blog.html') { '0.8' } else { '0.7' }
-  [void]$sm.AppendLine("  <url><loc>$SITE/$($f.Name)</loc><lastmod>$today</lastmod><changefreq>weekly</changefreq><priority>$pri</priority></url>")
+  # 한글 파일명(동네 페이지)은 퍼센트 인코딩해서 넣는다.
+  # sitemaps.org 규격이 URL-escaped 를 요구한다. 한글을 그대로 두면 수집을 건너뛸 수 있다.
+  $encName = [Uri]::EscapeDataString($f.Name).Replace('%2E', '.')
+  [void]$sm.AppendLine("  <url><loc>$SITE/$encName</loc><lastmod>$today</lastmod><changefreq>weekly</changefreq><priority>$pri</priority></url>")
 }
 [void]$sm.AppendLine('</urlset>')
 [IO.File]::WriteAllText((Join-Path $root "sitemap.xml"), $sm.ToString(), $utf8)
