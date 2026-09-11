@@ -93,6 +93,7 @@ $footer = @'
         <li><a href="index.html#ages">연령별 수업</a></li>
         <li><a href="teachers.html">선생님 찾기</a></li>
         <li><a href="regions.html">우리 동네</a></li>
+        <li><a href="teachers-all.html">전체 선생님 목록</a></li>
         <li><a href="index.html#process">수업방식</a></li>
         <li><a href="https://perfectedu.co.kr/" rel="noopener">초·중·고 과외는 티칭코칭</a></li>
       </ul>
@@ -188,7 +189,7 @@ foreach ($t in $sel) {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&display=swap" />
-<link rel="stylesheet" href="style.css?v=7" />
+<link rel="stylesheet" href="style.css?v=8" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -272,6 +273,94 @@ $footer
   $made++
 }
 Write-Host "선생님 페이지 생성: ${made}개"
+
+
+# ---------- 4-2) teachers-all.html (전체 선생님 목록) ----------
+# 선생님 찾기 페이지는 목록을 자바스크립트로 그린다. 그래서 HTML 원본에는
+# 선생님 페이지로 가는 링크가 하나도 없고, 검색엔진이 515장 중 대부분을 발견하지 못한다.
+# (동네 페이지에서 닿는 건 방문 가능한 131명뿐 → 나머지 384명이 고아 페이지가 된다.)
+# 이 페이지가 그 진입로다. 링크만 나열하는 HTML 사이트맵이고 푸터에서 연결된다.
+$subjOrder = @('국어', '수학', '영어', '과학', '사회', '코딩')
+$bySubj = [ordered]@{}
+foreach ($s in $subjOrder) { $bySubj[$s] = New-Object System.Collections.ArrayList }
+$bySubj['기타'] = New-Object System.Collections.ArrayList
+
+foreach ($t in $sel) {
+  $first = ($t.s -split ',')[0].Trim()
+  $key = if ($bySubj.Contains($first)) { $first } else { '기타' }
+  [void]$bySubj[$key].Add($t)
+}
+
+$lb = New-Object System.Text.StringBuilder
+$totalLinks = 0
+foreach ($key in $bySubj.Keys) {
+  $list = $bySubj[$key]
+  if ($list.Count -eq 0) { continue }
+  [void]$lb.AppendLine("    <h2 class=""tl-h"">$key 선생님 <span class=""tl-n"">$($list.Count)분</span></h2>")
+  [void]$lb.AppendLine('    <ul class="tlist">')
+  foreach ($t in ($list | Sort-Object { $_.n })) {
+    $gradeTxt = ($t.gr -split ',')[0].Trim()
+    $kidTxt = if ($t.k -eq 1) { ' · 유아·아동' } else { '' }
+    $whereTxt = if ($t.sd) { ' · ' + $t.sd + ' 방문 가능' } else { ' · 전국 화상' }
+    $label = (Esc("$($t.n) 선생님")) + " <span>" + (Esc("$(($t.s -split ',')[0]) $gradeTxt$kidTxt$whereTxt")) + "</span>"
+    [void]$lb.AppendLine("      <li><a href=""teacher-$($t.i).html"">$label</a></li>")
+    $totalLinks++
+  }
+  [void]$lb.AppendLine('    </ul>')
+}
+
+$allPage = @"
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>전체 선생님 목록 ($($sel.Count)분) · 키즈튜터</title>
+<meta name="description" content="키즈튜터에서 수업 가능한 선생님 $($sel.Count)분 전체 목록입니다. 국어·수학·영어·과학·사회 과목별로 정리했고, 이름을 누르면 선생님 소개로 이동합니다." />
+<meta name="keywords" content="유아 과외 선생님, 초등 과외 선생님, 화상과외 선생님 목록, 한글 과외, 초등 수학 과외, 초등 영어 과외" />
+<link rel="canonical" href="$SITE/teachers-all.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="키즈튜터" />
+<meta property="og:title" content="전체 선생님 목록 · 키즈튜터" />
+<meta property="og:description" content="유아·초등 1:1 화상과외 선생님 $($sel.Count)분 전체 목록" />
+<meta property="og:url" content="$SITE/teachers-all.html" />
+<meta property="og:image" content="$SITE/og-image.png" />
+<meta property="og:locale" content="ko_KR" />
+<link rel="icon" href="favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<link rel="stylesheet" href="style.css?v=8" />
+</head>
+<body>
+$header
+<section class="page-hero">
+  <div class="wrap">
+    <div class="crumb"><a href="index.html">홈</a> › <a href="teachers.html">선생님 찾기</a> › 전체 목록</div>
+    <h1>전체 선생님 목록</h1>
+    <p>키즈튜터에서 수업 가능한 선생님 $($sel.Count)분입니다. 과목별로 정리했고, 이름을 누르면 선생님 소개 페이지로 갑니다. 조건을 걸어 찾으시려면 <a href="teachers.html">선생님 찾기</a>를 쓰세요.</p>
+  </div>
+</section>
+<section>
+  <div class="wrap">
+$($lb.ToString())
+  </div>
+</section>
+<section class="cta">
+  <div class="wrap">
+    <h2 class="title">어떤 선생님이 맞을지 모르겠다면</h2>
+    <p class="lead">아이 나이와 지금 상황만 알려주시면 맞는 선생님을 찾아 연결해 드립니다. 첫 20분 체험은 무료입니다.</p>
+    <div class="cta-btns">
+      <a href="index.html#apply" class="btn btn-primary">🎁 무료 체험 신청</a>
+      <a href="regions.html" class="btn btn-ghost">우리 동네에서 찾기</a>
+    </div>
+  </div>
+</section>
+$footer
+<script src="script.js"></script>
+</body>
+</html>
+"@
+[IO.File]::WriteAllText((Join-Path $root "teachers-all.html"), $allPage, $utf8)
+Write-Host "teachers-all.html: 선생님 링크 $($totalLinks)개"
 
 # ---------- 5) sitemap.xml ----------
 $sm = New-Object System.Text.StringBuilder
