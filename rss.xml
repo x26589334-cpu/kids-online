@@ -5,7 +5,15 @@
 <description>한글떼기·숫자놀이·초등 학습 고민·해외 거주 가정을 위한 키즈튜터 블로그</description>
 <language>ko</language>
 <atom:link href="https://kidstutor.co.kr/rss.xml" rel="self" type="application/rss+xml" />
-<lastBuildDate>Sat, 12 Sep 2026 11:12:46 +0900</lastBuildDate>
+<lastBuildDate>Sun, 13 Sep 2026 23:04:22 +0900</lastBuildDate>
+<item>
+<title>글자는 읽는데 쓰기는 싫어해요</title>
+<link>https://kidstutor.co.kr/hangul-writing-refuse.html</link>
+<guid isPermaLink="true">https://kidstutor.co.kr/hangul-writing-refuse.html</guid>
+<category>한글떼기 · 쓰기</category>
+<description>한글은 곧잘 읽는데 연필만 쥐면 도망가는 아이. 읽기와 쓰기는 다른 일입니다. 싫어하는 세 가지 이유와 따라 쓰기 대신 집에서 해볼 방법을 정리했습니다.</description>
+<pubDate>Sun, 13 Sep 2026 10:00:00 +0900</pubDate>
+</item>
 <item>
 <title>해외라 읽을 한국 책이 없어요</title>
 <link>https://kidstutor.co.kr/overseas-korean-books.html</link>
@@ -119,19 +127,11 @@
 <pubDate>Thu, 10 Sep 2026 10:00:00 +0900</pubDate>
 </item>
 <item>
-<title>다섯 살도 화상수업이 될까요? 되는 아이와 안 되는 아이</title>
-<link>https://kidstutor.co.kr/yua-video-class-possible.html</link>
-<guid isPermaLink="true">https://kidstutor.co.kr/yua-video-class-possible.html</guid>
-<category>화상수업</category>
-<description>나이가 아니라 세 가지 신호로 갈립니다. 안 되는 아이에게 나타나는 모습과, 처음 2주를 넘기는 방법.</description>
-<pubDate>Thu, 10 Sep 2026 10:00:00 +0900</pubDate>
-</item>
-<item>
-<title>화상과외와 방문과외, 유아·초등은 뭐가 다를까</title>
-<link>https://kidstutor.co.kr/video-vs-visit-tutoring.html</link>
-<guid isPermaLink="true">https://kidstutor.co.kr/video-vs-visit-tutoring.html</guid>
-<category>화상수업</category>
-<description>각각 유리한 경우가 다릅니다. 선생님 선택 폭, 수업 길이, 비용 차이를 놓고 비교했습니다.</description>
+<title>학원 라이드 왕복 40분, 그 시간에 집에서</title>
+<link>https://kidstutor.co.kr/academy-ride-time.html</link>
+<guid isPermaLink="true">https://kidstutor.co.kr/academy-ride-time.html</guid>
+<category>우리 동네 · 맞벌이</category>
+<description>주 3회면 한 달에 8시간입니다. 수업료에 안 적혀 있는 비용과, 차에서 지친 아이가 수업 앞 10분을 쓰는 방식.</description>
 <pubDate>Thu, 10 Sep 2026 10:00:00 +0900</pubDate>
 </item>
 <item>
@@ -151,11 +151,27 @@
 <pubDate>Thu, 10 Sep 2026 10:00:00 +0900</pubDate>
 </item>
 <item>
-<title>학원 라이드 왕복 40분, 그 시간에 집에서</title>
-<link>https://kidstutor.co.kr/academy-ride-time.html</link>
-<guid isPermaLink="true">https://kidstutor.co.kr/academy-ride-time.html</guid>
-<category>우리 동네 · 맞벌이</category>
-<description>주 3회면 한 달에 8시간입니다. 수업료에 안 적혀 있는 비용과, 차에서 지친 아이가 수업 앞 10분을 쓰는 방식.</description>
+<title>읍·면에 살면 선생님이 안 오십니다</title>
+<link>https://kidstutor.co.kr/rural-no-tutor.html</link>
+<guid isPermaLink="true">https://kidstutor.co.kr/rural-no-tutor.html</guid>
+<category>우리 동네 · 읍면</category>
+<description>주소를 말하는 순간 거절당하는 이유와, 화상에는 거리가 없는 이유. 인터넷이 느려도 대체로 됩니다.</description>
+<pubDate>Thu, 10 Sep 2026 10:00:00 +0900</pubDate>
+</item>
+<item>
+<title>화상과외와 방문과외, 유아·초등은 뭐가 다를까</title>
+<link>https://kidstutor.co.kr/video-vs-visit-tutoring.html</link>
+<guid isPermaLink="true">https://kidstutor.co.kr/video-vs-visit-tutoring.html</guid>
+<category>화상수업</category>
+<description>각각 유리한 경우가 다릅니다. 선생님 선택 폭, 수업 길이, 비용 차이를 놓고 비교했습니다.</description>
+<pubDate>Thu, 10 Sep 2026 10:00:00 +0900</pubDate>
+</item>
+<item>
+<title>다섯 살도 화상수업이 될까요? 되는 아이와 안 되는 아이</title>
+<link>https://kidstutor.co.kr/yua-video-class-possible.html</link>
+<guid isPermaLink="true">https://kidstutor.co.kr/yua-video-class-possible.html</guid>
+<category>화상수업</category>
+<description>나이가 아니라 세 가지 신호로 갈립니다. 안 되는 아이에게 나타나는 모습과, 처음 2주를 넘기는 방법.</description>
 <pubDate>Thu, 10 Sep 2026 10:00:00 +0900</pubDate>
 </item>
 <item>
@@ -164,14 +180,6 @@
 <guid isPermaLink="true">https://kidstutor.co.kr/new-town-no-academy.html</guid>
 <category>우리 동네 · 신규 택지</category>
 <description>옥정·검단·고덕·운정. 학원가는 아파트보다 2~3년 늦는데 그동안 아이는 자랍니다.</description>
-<pubDate>Thu, 10 Sep 2026 10:00:00 +0900</pubDate>
-</item>
-<item>
-<title>읍·면에 살면 선생님이 안 오십니다</title>
-<link>https://kidstutor.co.kr/rural-no-tutor.html</link>
-<guid isPermaLink="true">https://kidstutor.co.kr/rural-no-tutor.html</guid>
-<category>우리 동네 · 읍면</category>
-<description>주소를 말하는 순간 거절당하는 이유와, 화상에는 거리가 없는 이유. 인터넷이 느려도 대체로 됩니다.</description>
 <pubDate>Thu, 10 Sep 2026 10:00:00 +0900</pubDate>
 </item>
 <item>
