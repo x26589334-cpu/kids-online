@@ -201,6 +201,7 @@ foreach ($t in $sel) {
   "worksFor": { "@type": "EducationalOrganization", "name": "키즈튜터", "url": "$SITE/" }
 }
 </script>
+<script src="analytics.js" defer></script>
 </head>
 <body>
 $header
@@ -329,6 +330,7 @@ $allPage = @"
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 <link rel="apple-touch-icon" href="apple-touch-icon.png" />
 <link rel="stylesheet" href="style.css?v=8" />
+<script src="analytics.js" defer></script>
 </head>
 <body>
 $header

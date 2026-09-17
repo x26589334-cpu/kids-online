@@ -232,6 +232,7 @@ $tBlock  </div>
 <link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&display=swap" />
 <link rel="stylesheet" href="style.css?v=8" />
+<script src="analytics.js" defer></script>
 </head>
 <body>
 $header
@@ -347,6 +348,7 @@ $rPage = @"
 <link rel="stylesheet" href="https://fastly.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jua&display=swap" />
 <link rel="stylesheet" href="style.css?v=8" />
+<script src="analytics.js" defer></script>
 </head>
 <body>
 $header
