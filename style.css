@@ -56,9 +56,8 @@ h2.title{font-size:clamp(26px,4vw,40px);font-weight:800;letter-spacing:-.03em;li
 
 /* Header */
 header{
-  position:sticky;top:0;z-index:50;background:rgba(255,255,255,.97);
-  -webkit-backdrop-filter:saturate(180%) blur(12px);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--line);
-}
+  position:sticky;top:0;z-index:50;background:rgb(255,255,255);border-bottom:1px solid var(--line);
+;isolation:isolate;-webkit-backface-visibility:hidden;backface-visibility:hidden;will-change:opacity}
 .nav{display:flex;align-items:center;justify-content:space-between;height:66px;gap:16px}
 .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;letter-spacing:-.03em;flex:0 0 auto}
 .brand .logo{
