@@ -31,7 +31,7 @@ git push
 - `gen.ps1` — 선생님 데이터/페이지/sitemap 생성기 · `make-images.ps1` — og-image.png / apple-touch-icon.png 생성기
 - `sitemap.xml` (gen.ps1 생성) / `robots.txt` / `favicon.svg`
 - **상단 메뉴 5개** (2026-09-05 정리): 홈 · 선생님 찾기 · 수업방식(`index.html#process`) · 블로그 · 자주 묻는 질문. 연령별·프로그램·학부모 후기는 메뉴에서 뺐지만 섹션은 홈에 남아 있음. 메뉴는 `gen.ps1` 의 `$header` 템플릿에도 있으니 바꿀 땐 같이 바꿀 것
-- `favicon.svg` = 마스코트 **키투** (index.html 히어로 인라인 SVG 와 같은 도형, 그림자만 뺌). `apple-touch-icon.png` 는 `make-images.ps1` 산출물이라 아직 옛 "K" 로고 — 바꾸려면 그 스크립트를 고쳐야 함
+- `favicon.svg` = 마스코트 **키투** (index.html 히어로 인라인 SVG 와 같은 도형, 그림자만 뺌). `apple-touch-icon.png` · `og-image.png` 도 `make-images.ps1` 산출물이며 2026-10-04 부터 같은 키투 도형을 쓴다(스크립트 안 `Kitu` 함수)
 
 ## 디자인
 - 팔레트: 주황 `--brand:#ff7a1f` / 살구 `--brand-2:#ffa94d` / 민트 `--accent:#1fb59b` / 노랑 `--sun:#ffd166` / 잉크 `#1e2a3f` / 바탕 `#fff7ee`

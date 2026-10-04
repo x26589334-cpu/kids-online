@@ -220,7 +220,7 @@ $tBlock  </div>
 <meta property="og:title" content="$(Esc $title)" />
 <meta property="og:description" content="$(Esc $desc)" />
 <meta property="og:url" content="$url" />
-<meta property="og:image" content="$SITE/og-image.png" />
+<meta property="og:image" content="$SITE/og-image.png?v=2" />
 <meta property="og:locale" content="ko_KR" />
 <meta name="robots" content="index,follow" />
 <meta name="theme-color" content="#ff7a1f" />
@@ -336,7 +336,7 @@ $rPage = @"
 <meta property="og:title" content="$(Esc $rTitle)" />
 <meta property="og:description" content="$(Esc $rDesc)" />
 <meta property="og:url" content="$SITE/regions.html" />
-<meta property="og:image" content="$SITE/og-image.png" />
+<meta property="og:image" content="$SITE/og-image.png?v=2" />
 <meta property="og:locale" content="ko_KR" />
 <meta name="robots" content="index,follow" />
 <meta name="theme-color" content="#ff7a1f" />
