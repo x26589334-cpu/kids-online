@@ -1,5 +1,11 @@
-﻿# og-image.png (1200x630) + apple-touch-icon.png (180x180) 생성 — System.Drawing
-# 링크 공유용 썸네일: 굵은 스티커 글씨(흰 테두리 + 진한 윤곽 + 그라데이션) + 키즈 장식
+﻿# apple-touch-icon.png (180x180) 생성 — System.Drawing
+#
+# ⚠️ og-image.png 는 더 이상 이 스크립트가 만들지 않는다 (2026-10-04).
+#    사용자가 직접 만든 그림(아이 사진이 들어간 썸네일)으로 바꿨고, 그 파일이 저장소의 og-image.png 다.
+#    아래 OG 생성 코드는 참고용으로 남겨뒀지만 $MAKE_OG 가 $false 라 실행되지 않는다.
+#    다시 코드로 그리고 싶으면 $MAKE_OG 를 $true 로 바꿀 것 — 사용자 그림을 덮어쓴다.
+$MAKE_OG = $false
+
 $ErrorActionPreference = "Stop"
 Add-Type -AssemblyName System.Drawing
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -94,7 +100,8 @@ function Dash {
   $g.DrawLine($pen, 0, 0, 0, $len); $g.Restore($st)
 }
 
-# ============ OG 이미지 ============
+# ============ OG 이미지 (참고용 — $MAKE_OG 가 $true 일 때만) ============
+if ($MAKE_OG) {
 $w = 1200; $h = 630
 $bmp = [System.Drawing.Bitmap]::new($w, $h)
 $g = [System.Drawing.Graphics]::FromImage($bmp)
@@ -188,6 +195,7 @@ $null = Txt $g "무료 20분 체험" 36 452 521 "#e2620a"
 
 $bmp.Save((Join-Path $root "og-image.png"), [System.Drawing.Imaging.ImageFormat]::Png)
 $g.Dispose(); $bmp.Dispose()
+}
 
 # ============ apple-touch-icon ============
 $s = 180
@@ -201,4 +209,5 @@ $g.FillRectangle($igrad, 0, 0, $s, $s)
 Kitu $g 90 94 1.22
 $bmp.Save((Join-Path $root "apple-touch-icon.png"), [System.Drawing.Imaging.ImageFormat]::Png)
 $g.Dispose(); $bmp.Dispose()
-Write-Host "og-image.png / apple-touch-icon.png 생성 완료 (폰트: $famName)"
+if ($MAKE_OG) { Write-Host "og-image.png 까지 다시 그림 — 사용자 그림을 덮어썼다!" }
+Write-Host "apple-touch-icon.png 생성 완료 (폰트: $famName)"

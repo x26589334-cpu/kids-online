@@ -28,10 +28,11 @@ git push
   - 실제 스크립트는 **구글 서버**(script.google.com, 계정 x26589334@gmail.com)에 있음. 저장소의 `google-apps-script.gs` 는 **참고용 사본이라 고쳐도 동작 안 바뀜**
   - 배포본에 **허용 탭 목록이 없어서** `sheet` 값이 그대로 탭 이름이 됨 → 오타 시 기본 탭("과외")으로 안 가고 **새 탭이 조용히 생김**. 탭 이름 건드렸으면 실제 시트 확인 필수
   - 2026-09-03 실제 제출 테스트로 "키즈 튜터" 탭 정상 도착 확인 (폼 3종·선생님 페이지 515개 전부 정상)
-- `gen.ps1` — 선생님 데이터/페이지/sitemap 생성기 · `make-images.ps1` — og-image.png / apple-touch-icon.png 생성기
+- `gen.ps1` — 선생님 데이터/페이지/sitemap 생성기 · `make-images.ps1` — apple-touch-icon.png 생성기
 - `sitemap.xml` (gen.ps1 생성) / `robots.txt` / `favicon.svg`
 - **상단 메뉴 5개** (2026-09-05 정리): 홈 · 선생님 찾기 · 수업방식(`index.html#process`) · 블로그 · 자주 묻는 질문. 연령별·프로그램·학부모 후기는 메뉴에서 뺐지만 섹션은 홈에 남아 있음. 메뉴는 `gen.ps1` 의 `$header` 템플릿에도 있으니 바꿀 땐 같이 바꿀 것
-- `favicon.svg` = 마스코트 **키투** (index.html 히어로 인라인 SVG 와 같은 도형, 그림자만 뺌). `apple-touch-icon.png` · `og-image.png` 도 `make-images.ps1` 산출물이며 2026-10-04 부터 같은 키투 도형을 쓴다(스크립트 안 `Kitu` 함수)
+- `favicon.svg` = 마스코트 **키투** (index.html 히어로 인라인 SVG 와 같은 도형, 그림자만 뺌). `apple-touch-icon.png` 도 같은 키투 도형(`make-images.ps1` 의 `Kitu` 함수, 2026-10-04)
+- ⚠️ `og-image.png` (링크 공유 썸네일, 1254×1254)는 **사용자가 직접 만든 그림**이다(2026-10-04). `make-images.ps1` 이 덮어쓰지 않도록 그 안 `$MAKE_OG` 가 `$false` 로 꺼져 있으니 켜지 말 것. 바꿀 땐 파일을 교체하고 전 페이지의 `og-image.png?v=` 숫자를 올린다(현재 v3)
 
 ## 디자인
 - 팔레트: 주황 `--brand:#ff7a1f` / 살구 `--brand-2:#ffa94d` / 민트 `--accent:#1fb59b` / 노랑 `--sun:#ffd166` / 잉크 `#1e2a3f` / 바탕 `#fff7ee`

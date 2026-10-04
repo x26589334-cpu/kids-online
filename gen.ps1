@@ -179,7 +179,7 @@ foreach ($t in $sel) {
 <meta property="og:title" content="$(Esc $title)" />
 <meta property="og:description" content="$(Esc $desc)" />
 <meta property="og:url" content="$url" />
-<meta property="og:image" content="$SITE/og-image.png?v=2" />
+<meta property="og:image" content="$SITE/og-image.png?v=3" />
 <meta property="og:locale" content="ko_KR" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
@@ -325,7 +325,7 @@ $allPage = @"
 <meta property="og:title" content="전체 선생님 목록 · 키즈튜터" />
 <meta property="og:description" content="유아·초등 1:1 화상과외 선생님 $($sel.Count)분 전체 목록" />
 <meta property="og:url" content="$SITE/teachers-all.html" />
-<meta property="og:image" content="$SITE/og-image.png?v=2" />
+<meta property="og:image" content="$SITE/og-image.png?v=3" />
 <meta property="og:locale" content="ko_KR" />
 <link rel="icon" href="favicon.svg" type="image/svg+xml" />
 <link rel="apple-touch-icon" href="apple-touch-icon.png" />
